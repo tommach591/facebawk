@@ -1,0 +1,17 @@
+.HomeButton {
+  width: 14rem;
+  height: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HomeButton:hover {
+  cursor: pointer;
+}
+
+.HomeIcon {
+  width: 14rem;
+  height: 4rem;
+}
