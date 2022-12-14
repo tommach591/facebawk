@@ -1,15 +1,12 @@
 import "./HomeButton.css";
 import { Link } from "react-router-dom";
+import Facebook from "../../utils/facebook.svg";
 
 function HomeButton() {
   return (
     <div className="HomeButton">
       <Link to="/">
-        <img
-          className="HomeIcon"
-          src={"https://www.logo.wine/a/logo/Facebook/Facebook-Logo.wine.svg"}
-          alt="Home"
-        />
+        <img className="HomeIcon" src={Facebook} alt="Home" />
       </Link>
     </div>
   );

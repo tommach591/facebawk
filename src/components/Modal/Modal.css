@@ -1,0 +1,33 @@
+.Modal {
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+
+  position: fixed;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalContent {
+  position: relative;
+
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0px 2px 8px rgb(200, 200, 200);
+}
+
+.CloseModalButton {
+  width: 1.5rem;
+
+  position: absolute;
+  left: 92%;
+  top: 8%;
+}
+
+.CloseModalButton:hover {
+  cursor: pointer;
+}

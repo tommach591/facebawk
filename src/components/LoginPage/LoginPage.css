@@ -1,0 +1,197 @@
+.LoginPage {
+  width: 100vw;
+  height: 100vh;
+
+  background: rgb(255, 255, 255);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SignIn {
+  height: 74.275%;
+  width: 100%;
+
+  background: rgb(240, 242, 245);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+
+  position: relative;
+  left: -2.75rem;
+  top: -6.5rem;
+}
+
+.Description > img {
+  width: 18.75rem;
+
+  position: relative;
+  left: -1.65rem;
+  top: 0.35rem;
+}
+
+.Description > h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  width: 32rem;
+  line-height: 32px;
+
+  position: relative;
+  left: 0.1rem;
+  top: -0.1rem;
+}
+
+.SignInForm {
+  width: 25rem;
+  height: 22rem;
+
+  position: relative;
+  left: 1.4rem;
+  top: -3.2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 2px 8px rgb(200, 200, 200);
+}
+
+.SignInForm > input {
+  width: 85%;
+  height: 1.75rem;
+  padding: 10px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+
+  outline: none;
+
+  margin-top: 1rem;
+
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 5px;
+}
+
+.SignInForm > input:focus {
+  border: 1px solid rgb(24, 119, 242);
+  box-shadow: 0px 0px 3px rgb(24, 119, 242);
+}
+
+.LoginButton {
+  width: 90%;
+  height: 3rem;
+
+  margin-top: 1rem;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+
+  background: rgb(24, 119, 242);
+  border: 0px;
+  border-radius: 5px;
+}
+
+.LoginButton:hover {
+  cursor: pointer;
+  background: rgb(20, 110, 235);
+}
+
+.LoginButton:active {
+  cursor: pointer;
+  background: rgb(35, 55, 115);
+}
+
+.ForgotPasswordButton {
+  margin: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgb(24, 119, 242);
+}
+
+.Line {
+  border-bottom: 1px solid rgb(218, 221, 225);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.SignUpButton {
+  width: 47.5%;
+  height: 3rem;
+
+  margin-top: 1rem;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+
+  background: rgb(66, 183, 42);
+  border: 0px;
+  border-radius: 5px;
+}
+
+.SignUpButton:hover {
+  cursor: pointer;
+  background: rgb(55, 175, 30);
+}
+
+.SignUpButton:active {
+  cursor: pointer;
+  background: rgb(50, 145, 30);
+}
+
+.LoginPageBottom {
+  height: 25.725%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Fineprint {
+  position: relative;
+  left: -24rem;
+  top: -5rem;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgb(100, 100, 100);
+}
+
+.SignUpForm {
+  width: 25rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.SignUpFormTitle {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: rgb(28, 30, 33);
+
+  margin: 0.5rem;
+}
+
+.SignUpFormDescription {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: rgb(96, 103, 135);
+
+  margin: 0.5rem;
+}
