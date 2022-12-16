@@ -1,7 +1,9 @@
 import "./LoginPage.css";
-import BookToFace from "../../utils/booktoface.svg";
+import BookToFace from "../../assets/booktoface.svg";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
+import uuid from "react-uuid";
+import Modal from "../Modal/";
+import { useEffect } from "react";
 
 function LoginPage({ isMobile }) {
   const [modalOn, setModalOn] = useState(false);
@@ -18,11 +20,79 @@ function LoginPage({ isMobile }) {
   const [year, setYear] = useState("1900");
   const [gender, setGender] = useState("Female");
 
+  const [response, setResponse] = useState(null);
+
   let createAccount = () => {
-    console.log(firstName, lastName);
-    console.log(email, password);
-    console.log(month, day, year);
-    console.log(gender);
+    let body = {
+      email: email,
+      password: password,
+    };
+
+    fetch(`http://localhost:3001/api/account/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        if (res.ok) res.json();
+        else setResponse("404");
+      })
+      .then((retrieved) => {
+        setResponse(retrieved);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  let loginAccount = () => {
+    fetch(`http://localhost:3001/api/account/login/${loginEmail}`)
+      .then((res) => {
+        if (res.ok) res.json();
+        else setResponse("404");
+      })
+      .then((retrieved) => {
+        setResponse(retrieved);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  let deleteAccount = () => {
+    let body = {
+      email: loginEmail,
+      password: loginPassword,
+    };
+
+    fetch(`http://localhost:3001/api/account/delete`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        if (res.ok) res.json();
+        else setResponse("404");
+      })
+      .then((retrieved) => {
+        setResponse(retrieved);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  let getAllAccount = () => {
+    fetch("http://localhost:3001/api/account/allAccounts")
+      .then((res) => {
+        if (res.ok) res.json();
+        else setResponse("404");
+      })
+      .then((retrieved) => {
+        setResponse(retrieved);
+        console.log(retrieved);
+      })
+      .catch((err) => console.error(err));
   };
 
   const getWeb = () => {
@@ -50,14 +120,24 @@ function LoginPage({ isMobile }) {
                 setLoginPassword(event.currentTarget.value);
               }}
             />
-            <button
-              className="LoginButton"
-              onClick={() => {
-                console.log(loginEmail, loginPassword);
-              }}
-            >
-              Log in
-            </button>
+            <div className="LoginButtonContainer">
+              <button
+                className="LoginButton"
+                onClick={() => {
+                  loginAccount();
+                }}
+              >
+                Log in
+              </button>
+              <button
+                className="LoginButton"
+                onClick={() => {
+                  deleteAccount();
+                }}
+              >
+                Delete Account
+              </button>
+            </div>
             <div className="ForgotPasswordButton">Forgot Password?</div>
             <div className="Line" style={{ width: "90%" }} />
             <div className="LoginButtons">
@@ -72,7 +152,7 @@ function LoginPage({ isMobile }) {
               <button
                 className="SignUpButton GuestLoginButton"
                 onClick={() => {
-                  console.log("You are a guest.");
+                  getAllAccount();
                 }}
               >
                 Use Guest Account
@@ -92,6 +172,7 @@ function LoginPage({ isMobile }) {
               onSubmit={(event) => {
                 event.preventDefault();
                 createAccount();
+                setModalOn(false);
               }}
             >
               <div className="SignUpFormNames">

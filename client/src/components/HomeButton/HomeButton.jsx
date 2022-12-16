@@ -1,6 +1,6 @@
 import "./HomeButton.css";
 import { Link } from "react-router-dom";
-import BookToFace from "../../utils/booktoface.svg";
+import BookToFace from "../../assets/booktoface.svg";
 
 function HomeButton() {
   return (
