@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <LoginPage />
+      {user === "" ? <LoginPage setUser={setUser} /> : <div />}
     </div>
   );
 }

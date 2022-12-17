@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  type: {
+  user_id: {
     type: String,
     required: true,
   },
@@ -10,7 +10,7 @@ const PostSchema = new Schema({
     type: String,
     required: false,
   },
-  owner_id: {
+  type: {
     type: String,
     required: true,
   },

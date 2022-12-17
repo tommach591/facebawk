@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
+  user_id: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -24,31 +28,63 @@ const ProfileSchema = new Schema({
   },
   date_created: {
     type: Date,
-    required: true,
+    default: new Date(Date.now()),
   },
   friends: {
     type: Array,
-    required: false,
+    default: [],
   },
   pfp: {
     type: String,
     required: false,
   },
+  banner: {
+    type: String,
+    required: false,
+  },
+  bio: {
+    type: String,
+    required: false,
+  },
+  work: {
+    type: String,
+    required: false,
+  },
+  education: {
+    type: String,
+    required: false,
+  },
+  city: {
+    type: String,
+    required: false,
+  },
+  hometown: {
+    type: String,
+    required: false,
+  },
+  relationship: {
+    type: String,
+    required: false,
+  },
+  name_pronunciation: {
+    type: String,
+    required: false,
+  },
   photos: {
     type: Array,
-    required: false,
+    default: [],
   },
   posts_made: {
     type: Array,
-    required: false,
+    default: [],
   },
   posts_liked: {
     type: Array,
-    required: false,
+    default: [],
   },
   posts_shared: {
     type: Array,
-    required: false,
+    default: [],
   },
 });
 
