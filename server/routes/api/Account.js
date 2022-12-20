@@ -6,8 +6,12 @@ const Account = require("../../schemas/Account");
 router.get("/allAccounts", (req, res) => {
   console.log("Hit at http://localhost:3001/api/account/allAccounts");
   Account.find()
-    .then((acc) => res.json(acc))
-    .catch((err) => res.status(404).json({ account_not_found: "No accounts" }));
+    .then((acc) => {
+      return res.json(acc);
+    })
+    .catch((err) => {
+      return res.status(404).json({ account_not_found: "No accounts" });
+    });
 });
 
 router.get("/login/:email", (req, res) => {
@@ -17,11 +21,11 @@ router.get("/login/:email", (req, res) => {
     .then((acc) => {
       return res.json(acc);
     })
-    .catch((err) =>
-      res
+    .catch((err) => {
+      return res
         .status(404)
-        .json({ account_not_found: "No account found with that email" })
-    );
+        .json({ account_not_found: "No account found with that email" });
+    });
 });
 
 router.post("/signup", (req, res) => {
@@ -34,9 +38,11 @@ router.post("/signup", (req, res) => {
 
   Account.exists({ email: req.body.email }, (err, doc) => {
     if (doc) {
-      res.json({ success: false });
+      return res.json({ success: false });
     } else {
-      newAccount.save().then((newAcc) => res.json(newAcc));
+      newAccount.save().then((newAcc) => {
+        return res.json(newAcc);
+      });
     }
   });
 });
@@ -49,9 +55,9 @@ router.delete("/delete", (req, res) => {
   Account.exists({ email: email, password: password }, (err, doc) => {
     if (doc) {
       Account.findOneAndRemove({ email: email, password: password }).exec();
-      res.json({ success: true });
+      return res.json({ success: true });
     } else {
-      res.json({ success: false });
+      return res.json({ success: false });
     }
   });
 });

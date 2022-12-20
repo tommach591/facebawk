@@ -1,5 +1,16 @@
+const serverURL = "http://localhost:3001";
+
 export function getAllProfile() {
-  return fetch("http://localhost:3001/api/profile/allProfiles")
+  return fetch(`${serverURL}/api/profile/allProfiles`)
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function getProfile(user_id) {
+  return fetch(`${serverURL}/api/profile/get/${user_id}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -17,7 +28,7 @@ export function createProfile(user_id, email, first, last, birthdate, gender) {
     gender: gender,
   };
 
-  return fetch(`http://localhost:3001/api/profile/signup`, {
+  return fetch(`${serverURL}/api/profile/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -37,7 +48,7 @@ export function deleteProfile(loginEmail) {
     email: loginEmail,
   };
 
-  return fetch(`http://localhost:3001/api/profile/delete`, {
+  return fetch(`${serverURL}/api/profile/delete`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",

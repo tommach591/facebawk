@@ -1,5 +1,5 @@
 import "./LoginPage.css";
-import BookToFace from "../../assets/booktoface.svg";
+import Logo from "../../assets/logo.png";
 import { useState } from "react";
 import {
   loginAccount,
@@ -9,7 +9,7 @@ import {
 import { deleteProfile, getAllProfile } from "../../utils/Profile";
 import SignUpForm from "../SignUpForm";
 
-function LoginPage({ setUser, isMobile }) {
+function LoginPage({ changeUser, isMobile }) {
   const [modalOn, setModalOn] = useState(false);
 
   const [loginEmail, setLoginEmail] = useState("");
@@ -18,8 +18,7 @@ function LoginPage({ setUser, isMobile }) {
   const handleLogin = () => {
     loginAccount(loginEmail).then((res) => {
       if (res && res.password === loginPassword) {
-        setUser(res._id);
-        alert("Success!");
+        changeUser(res._id);
       } else {
         alert("Invalid email and password.");
       }
@@ -52,10 +51,8 @@ function LoginPage({ setUser, isMobile }) {
       <div className="LoginPage">
         <div className="SignIn">
           <div className="Description">
-            <img src={BookToFace} alt="booktoface" />
-            <h1>
-              Connect with friends and the world around you on BookToFace.
-            </h1>
+            <img src={Logo} alt="FaceBawk" />
+            <h1>Cluck cluck cluck to all your friends on FaceBawk🐔.</h1>
           </div>
           <div className="SignInForm">
             <input
@@ -74,9 +71,9 @@ function LoginPage({ setUser, isMobile }) {
               }}
               value={new Array(loginPassword.length + 1).join("*")}
             />
-            <div className="LoginButtonContainer">
+            <div className="LoginScreenButtonContainer">
               <button
-                className="LoginButton"
+                className="LoginScreenButton Login"
                 onClick={() => {
                   handleLogin();
                 }}
@@ -84,27 +81,7 @@ function LoginPage({ setUser, isMobile }) {
                 Log in
               </button>
               <button
-                className="LoginButton"
-                onClick={() => {
-                  handleDeleteAccount();
-                }}
-              >
-                Delete Account
-              </button>
-            </div>
-            <div className="ForgotPasswordButton">Forgot Password?</div>
-            <div className="Line" style={{ width: "90%" }} />
-            <div className="LoginButtons">
-              <button
-                className="SignUpButton"
-                onClick={() => {
-                  setModalOn(true);
-                }}
-              >
-                Create New Account
-              </button>
-              <button
-                className="SignUpButton GuestLoginButton"
+                className="LoginScreenButton Guest"
                 onClick={() => {
                   handleGetAllAccount();
                 }}
@@ -112,10 +89,32 @@ function LoginPage({ setUser, isMobile }) {
                 Use Guest Account
               </button>
             </div>
+            <div className="ForgotPasswordButton">Forgot Password?</div>
+            <div className="Line" style={{ width: "90%" }} />
+            <div className="LoginScreenButtonContainer">
+              <button
+                className="LoginScreenButton Create"
+                onClick={() => {
+                  setModalOn(true);
+                }}
+              >
+                Create New Account
+              </button>
+              <button
+                className="LoginScreenButton Delete"
+                onClick={() => {
+                  handleDeleteAccount();
+                }}
+              >
+                Delete Account
+              </button>
+            </div>
           </div>
         </div>
         <div className="LoginPageBottom">
-          <h1 className="Fineprint">This is a BookToFace by Tom Mach.</h1>
+          <h1 className="Fineprint">
+            This is FaceBawk🐔 by ✨Tom Mach✨. Buk, buk, buk, ba-gawk.
+          </h1>
         </div>
         <SignUpForm modalOn={modalOn} setModalOn={setModalOn} />
       </div>

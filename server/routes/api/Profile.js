@@ -10,6 +10,18 @@ router.get("/allProfiles", (req, res) => {
     .catch((err) => res.status(404).json({ profile_not_found: "No profiles" }));
 });
 
+router.get("/get/:user_id", (req, res) => {
+  let user_id = req.params.user_id;
+  console.log(`Hit at http://localhost:3001/api/profile/get/${user_id}`);
+  Profile.findOne({ user_id: user_id })
+    .then((acc) => {
+      return res.json(acc);
+    })
+    .catch((err) => {
+      return res.status(404).json({ profile_not_found: "No profiles" });
+    });
+});
+
 router.post("/signup", (req, res) => {
   console.log("Hit at http://localhost:3001/api/profile/signup");
 
@@ -22,7 +34,9 @@ router.post("/signup", (req, res) => {
     gender: req.body.gender,
   });
 
-  newProfile.save().then((newProf) => res.json(newProf));
+  newProfile.save().then((newProf) => {
+    return res.json(newProf);
+  });
 });
 
 router.delete("/delete", (req, res) => {
@@ -30,7 +44,7 @@ router.delete("/delete", (req, res) => {
   let email = req.body.email;
 
   Profile.findOneAndRemove({ email: email }).exec();
-  res.json({ success: true });
+  return res.json({ success: true });
 });
 
 module.exports = router;

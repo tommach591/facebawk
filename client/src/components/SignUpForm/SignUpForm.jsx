@@ -190,13 +190,11 @@ function SignUpForm({ modalOn, setModalOn }) {
           </div>
           <div className="SignUpTerms">
             <h2>
-              People who use our service may not have uploaded your contact
-              information to BookToFace. This is fake.
+              This is fake. FaceBawk will not do anything with your information.
             </h2>
             <h2>
               By clicking Sign Up, you agree to our nonexistent Terms, Privacy
-              Policy and Cookies Policy and acknowledge this is fake. You won't
-              receive SMS Notifications from us.
+              Policy and Cookies Policy and acknowledge this is fake.
             </h2>
           </div>
           <div className="SignUpFormButtonContainer">

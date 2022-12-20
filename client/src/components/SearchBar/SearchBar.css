@@ -1,0 +1,32 @@
+.SearchBar {
+  width: 35%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.SearchBar > img {
+  width: 1.25rem;
+  position: absolute;
+  left: 0.5rem;
+}
+
+.SearchBar > input {
+  width: 100%;
+  height: 2rem;
+  border: 1px solid rgb(120, 120, 120);
+  border-radius: 20px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  outline: none;
+  background: white;
+}
+
+.SearchBar > input:focus {
+  border: 1px solid rgb(230, 48, 48);
+  box-shadow: 0px 0px 3px rgb(230, 48, 48);
+}
