@@ -3,6 +3,9 @@ import LoginPage from "../LoginPage";
 import HomePage from "../HomePage";
 import { useState } from "react";
 import { getCookie } from "../../utils/helper";
+import { getAllAccount } from "../../utils/Account";
+import { getAllProfile } from "../../utils/Profile";
+import { deleteAllPost, getAllPost } from "../../utils/Post";
 
 function Home() {
   const [user, setUser] = useState(getCookie("id"));

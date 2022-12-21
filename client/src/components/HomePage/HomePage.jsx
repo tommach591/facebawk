@@ -1,12 +1,17 @@
 import "./HomePage.css";
 import { useState } from "react";
 import Header from "../Header";
+import Post from "../Post";
 import { useEffect } from "react";
 import { getProfile } from "../../utils/Profile";
+import { deleteAllPost, getAllPost, getNewsFeed } from "../../utils/Post";
+import CreatePost from "../CreatePost/CreatePost";
 
 function HomePage({ user, changeUser }) {
+  const [modalOn, setModalOn] = useState(false);
   const [search, setSearch] = useState("");
   const [userData, setUserData] = useState({});
+  const [newsFeed, setNewsFeed] = useState([]);
 
   useEffect(() => {
     getProfile(user).then((res) => {
@@ -16,7 +21,26 @@ function HomePage({ user, changeUser }) {
 
   useEffect(() => {
     console.log(userData);
+    getAllPost().then((res) => {
+      console.log(res);
+    });
+    if (Object.keys(userData).length !== 0)
+      getNewsFeed(userData.user_id, userData.friends).then((res) => {
+        if (res) {
+          res.sort((a, b) => {
+            const a_date = new Date(a.date_created);
+            const b_date = new Date(b.date_created);
+            return b_date - a_date;
+          });
+          setNewsFeed(res);
+        }
+      });
   }, [userData]);
+
+  let appendNewPost = (post) => {
+    let newNewsFeed = [post, ...newsFeed];
+    setNewsFeed(newNewsFeed);
+  };
 
   return userData ? (
     <div className="HomePage">
@@ -25,8 +49,19 @@ function HomePage({ user, changeUser }) {
         changeUser={changeUser}
         setSearch={setSearch}
       />
+      <CreatePost
+        userData={userData}
+        modalOn={modalOn}
+        setModalOn={setModalOn}
+        appendNewPost={appendNewPost}
+      />
       <div className="Content">
-        <div className="Cluck">
+        <div
+          className="Cluck"
+          onClick={() => {
+            setModalOn(true);
+          }}
+        >
           <div className="MainCluck">
             <img
               src={
@@ -40,6 +75,9 @@ function HomePage({ user, changeUser }) {
           </div>
           <div className="Line" style={{ width: "95%" }} />
         </div>
+        {newsFeed.map((post) => {
+          return <Post key={post._id} post={post} />;
+        })}
       </div>
     </div>
   ) : (

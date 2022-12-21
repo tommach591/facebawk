@@ -28,11 +28,11 @@ const ProfileSchema = new Schema({
   },
   date_created: {
     type: Date,
-    default: new Date(Date.now()),
+    required: true,
   },
   friends: {
     type: Array,
-    default: [],
+    required: false,
   },
   pfp: {
     type: String,
@@ -72,19 +72,19 @@ const ProfileSchema = new Schema({
   },
   photos: {
     type: Array,
-    default: [],
+    required: false,
   },
   posts_made: {
     type: Array,
-    default: [],
+    required: false,
   },
   posts_liked: {
     type: Array,
-    default: [],
+    required: false,
   },
   posts_shared: {
     type: Array,
-    default: [],
+    required: false,
   },
 });
 

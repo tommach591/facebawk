@@ -15,7 +15,8 @@ router.get("/allAccounts", (req, res) => {
 });
 
 router.get("/login/:email", (req, res) => {
-  let email = req.params.email;
+  const { email } = req.params;
+
   console.log(`Hit at http://localhost:3001/api/account/login/${email}`);
   Account.findOne({ email: email })
     .then((acc) => {
@@ -29,28 +30,30 @@ router.get("/login/:email", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
+  const { email, password } = req.body;
+
   console.log("Hit at http://localhost:3001/api/account/signup");
 
   const newAccount = new Account({
-    email: req.body.email,
-    password: req.body.password,
+    email: email,
+    password: password,
   });
 
-  Account.exists({ email: req.body.email }, (err, doc) => {
+  Account.exists({ email: email }, (err, doc) => {
     if (doc) {
       return res.json({ success: false });
     } else {
-      newAccount.save().then((newAcc) => {
-        return res.json(newAcc);
+      newAccount.save().then((acc) => {
+        return res.json(acc);
       });
     }
   });
 });
 
 router.delete("/delete", (req, res) => {
+  const { email, password } = req.body;
+
   console.log("Hit at http://localhost:3001/api/account/delete");
-  let email = req.body.email;
-  let password = req.body.password;
 
   Account.exists({ email: email, password: password }, (err, doc) => {
     if (doc) {

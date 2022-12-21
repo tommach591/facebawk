@@ -1,14 +1,14 @@
 .HomePage {
-  height: 101vh;
-
+  min-height: 101vh;
   position: relative;
   overflow-x: hidden;
 
-  background: rgb(255, 255, 255);
+  background: rgb(255, 250, 230);
 }
 
 .Content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -27,6 +27,11 @@
   border-radius: 15px;
 
   background: rgb(255, 250, 200);
+  margin: 0.5rem;
+}
+
+.Cluck:hover {
+  cursor: pointer;
 }
 
 .MainCluck {
@@ -55,4 +60,8 @@
   background: white;
 
   margin: 0.5rem;
+}
+
+.MainCluck > input:hover {
+  cursor: pointer;
 }
