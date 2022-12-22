@@ -1,30 +1,16 @@
 import "./HomePage.css";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "../Header";
 import Post from "../Post";
-import { useEffect } from "react";
-import { getProfile } from "../../utils/Profile";
-import { deleteAllPost, getAllPost, getNewsFeed } from "../../utils/Post";
-import CreatePost from "../CreatePost/CreatePost";
+import CreatePost from "../CreatePost/";
+import { getNewsFeed } from "../../utils/Post";
 
-function HomePage({ user, changeUser }) {
+function HomePage({ userData, changeUser, setSearch }) {
   const [modalOn, setModalOn] = useState(false);
-  const [search, setSearch] = useState("");
-  const [userData, setUserData] = useState({});
   const [newsFeed, setNewsFeed] = useState([]);
 
-  useEffect(() => {
-    getProfile(user).then((res) => {
-      setUserData(res);
-    });
-  }, [user]);
-
-  useEffect(() => {
-    console.log(userData);
-    getAllPost().then((res) => {
-      console.log(res);
-    });
-    if (Object.keys(userData).length !== 0)
+  const loadNewsFeed = useCallback(() => {
+    if (Object.keys(userData).length !== 0) {
       getNewsFeed(userData.user_id, userData.friends).then((res) => {
         if (res) {
           res.sort((a, b) => {
@@ -35,12 +21,18 @@ function HomePage({ user, changeUser }) {
           setNewsFeed(res);
         }
       });
+    }
   }, [userData]);
 
   let appendNewPost = (post) => {
     let newNewsFeed = [post, ...newsFeed];
     setNewsFeed(newNewsFeed);
   };
+
+  useEffect(() => {
+    console.log(userData);
+    loadNewsFeed();
+  }, [userData, loadNewsFeed]);
 
   return userData ? (
     <div className="HomePage">
@@ -71,7 +63,7 @@ function HomePage({ user, changeUser }) {
               }
               alt="PFP"
             />
-            <input type="text" placeholder="What's clucking?" />
+            <input type="text" placeholder="What's clucking?" disabled />
           </div>
           <div className="Line" style={{ width: "95%" }} />
         </div>

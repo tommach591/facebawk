@@ -16,7 +16,7 @@
 }
 
 .Cluck {
-  width: 35%;
+  width: 42rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -57,11 +57,12 @@
   padding-left: 1rem;
   padding-right: 1rem;
   outline: none;
-  background: white;
+  background: rgb(250, 250, 250);
 
   margin: 0.5rem;
 }
 
 .MainCluck > input:hover {
   cursor: pointer;
+  background: rgb(255, 255, 255);
 }

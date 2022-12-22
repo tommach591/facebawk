@@ -1,13 +1,19 @@
 import "./HomeButton.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Icon from "../../assets/icon.png";
 
 function HomeButton() {
+  const navigate = useNavigate();
   return (
     <div className="HomeButton">
-      <Link to="/">
-        <img className="HomeIcon" src={Icon} alt="🐔" />
-      </Link>
+      <img
+        className="HomeIcon"
+        src={Icon}
+        alt="🐔"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
     </div>
   );
 }

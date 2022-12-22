@@ -1,5 +1,5 @@
 .Post {
-  width: 35%;
+  width: 42rem;
 
   position: relative;
   display: flex;
@@ -34,6 +34,10 @@
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   margin-bottom: 0.25rem;
+}
+
+.User:hover {
+  cursor: pointer;
 }
 
 .Date {

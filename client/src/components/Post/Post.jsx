@@ -1,23 +1,21 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getProfile } from "../../utils/Profile";
 import "./Post.css";
 
 function Post({ post }) {
+  const navigate = useNavigate();
   const [owner, setOwner] = useState();
-  const [datePosted, setDatePosted] = useState();
-  const now = new Date(Date.now());
+  const [datePosted, setDatePosted] = useState(new Date(post.date_created));
 
   useEffect(() => {
     getProfile(post.user_id).then((res) => {
+      console.log(res);
       setOwner(res);
     });
-
-    const newDate = new Date(post.date_created);
-    setDatePosted(newDate);
   }, [post]);
 
-  return owner ? (
+  return (
     <div className="Post">
       <div className="Author">
         <img
@@ -27,7 +25,16 @@ function Post({ post }) {
           alt="PFP"
         />
         <div className="PostInfo">
-          <h1 className="Name">{`${owner.first} ${owner.last}`}</h1>
+          {owner ? (
+            <h1
+              className="Name User"
+              onClick={() => {
+                navigate(`/profile/?user=${post.user_id}`);
+              }}
+            >{`${owner.first} ${owner.last}`}</h1>
+          ) : (
+            <h1 className="Name">Anonymous User</h1>
+          )}
           <h1 className="Date">{datePosted.toDateString()}</h1>
         </div>
       </div>
@@ -36,15 +43,13 @@ function Post({ post }) {
       <div className="PostInteractions">
         <h1 className="PostLike">Like</h1>
         <h1 className="PostComment">Comment</h1>
-        {post.user_id !== owner.user_id ? (
+        {owner && post.user_id === owner.user_id ? (
           <div />
         ) : (
           <h1 className="PostShare">Share</h1>
         )}
       </div>
     </div>
-  ) : (
-    <div />
   );
 }
 
