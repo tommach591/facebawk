@@ -2,7 +2,7 @@ import "./Header.css";
 import HomeButton from "../HomeButton";
 import SearchBar from "../SearchBar/";
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Header({ userData, changeUser, setSearch }) {
   const navigate = useNavigate();

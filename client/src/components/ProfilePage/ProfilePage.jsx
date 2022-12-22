@@ -1,19 +1,22 @@
 import { useEffect, useState, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { getPostByUser } from "../../utils/Post";
 import { getProfile } from "../../utils/Profile";
-import CreatePost from "../CreatePost";
 import Header from "../Header";
+import CreatePost from "../CreatePost";
+import EditDetails from "../EditDetails";
 import Post from "../Post";
 import "./ProfilePage.css";
 
-function ProfilePage({ user, userData, changeUser, setSearch }) {
+function ProfilePage({ user, userData, changeUser, setSearch, setUserData }) {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("user");
-  const isOwner = userData.user_id === id;
+  const isOwner = user === id;
   const [profileData, setProfileData] = useState({});
   const [profilePosts, setProfilePosts] = useState([]);
-  const [modalOn, setModalOn] = useState(false);
+  const [postModalOn, setPostModalOn] = useState(false);
+  const [editDetailsModalOn, setEditDetailsModalOn] = useState(false);
 
   const loadUserPosts = useCallback(() => {
     if (Object.keys(profileData).length !== 0) {
@@ -35,11 +38,17 @@ function ProfilePage({ user, userData, changeUser, setSearch }) {
     setProfilePosts(newProfilePosts);
   };
 
+  let updateProfile = (newProfile) => {
+    setUserData(newProfile);
+    setProfileData(newProfile);
+  };
+
   useEffect(() => {
     getProfile(id).then((res) => {
-      setProfileData(res);
+      if (res) setProfileData(res);
+      else navigate(`/profile/?user=${user}`);
     });
-  }, [id]);
+  }, [id, navigate, user]);
 
   useEffect(() => {
     loadUserPosts();
@@ -55,9 +64,19 @@ function ProfilePage({ user, userData, changeUser, setSearch }) {
       {isOwner ? (
         <CreatePost
           userData={userData}
-          modalOn={modalOn}
-          setModalOn={setModalOn}
+          modalOn={postModalOn}
+          setModalOn={setPostModalOn}
           appendNewPost={appendNewPost}
+        />
+      ) : (
+        <div />
+      )}
+      {isOwner ? (
+        <EditDetails
+          userData={userData}
+          modalOn={editDetailsModalOn}
+          setModalOn={setEditDetailsModalOn}
+          updateProfile={updateProfile}
         />
       ) : (
         <div />
@@ -156,7 +175,17 @@ function ProfilePage({ user, userData, changeUser, setSearch }) {
             )}
           </div>
           <div className="EditDetailsButtonContainer">
-            {isOwner ? <button>Edit Details</button> : <div />}
+            {isOwner ? (
+              <button
+                onClick={() => {
+                  setEditDetailsModalOn(true);
+                }}
+              >
+                Edit Details
+              </button>
+            ) : (
+              <div />
+            )}
           </div>
         </div>
         <div className="Interactions">
@@ -164,7 +193,7 @@ function ProfilePage({ user, userData, changeUser, setSearch }) {
             <div
               className="Cluck"
               onClick={() => {
-                setModalOn(true);
+                setPostModalOn(true);
               }}
             >
               <div className="MainCluck">

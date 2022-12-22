@@ -47,6 +47,7 @@ function App() {
               userData={userData}
               changeUser={changeUser}
               setSearch={setSearch}
+              setUserData={setUserData}
             />
           }
         />

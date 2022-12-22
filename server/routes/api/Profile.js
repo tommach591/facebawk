@@ -56,6 +56,24 @@ router.post("/signup", (req, res) => {
   });
 });
 
+router.post("/update/intro", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/profile/update/intro");
+  const { user_id, bio, work, education, city, hometown, relationship } =
+    req.body;
+
+  Profile.findOneAndUpdate(
+    { user_id: user_id },
+    {
+      bio: bio,
+      work: work,
+      education: education,
+      city: city,
+      hometown: hometown,
+      relationship: relationship,
+    }
+  ).exec();
+});
+
 router.post("/update/friends", (req, res) => {
   console.log("Hit at http://localhost:3001/api/profile/update/friends");
   const { user_id, new_friend } = req.body;

@@ -43,6 +43,40 @@ export function createProfile(user_id, email, first, last, birthdate, gender) {
     .catch((err) => console.error(err));
 }
 
+export function updateIntro(
+  user_id,
+  bio,
+  work,
+  education,
+  city,
+  hometown,
+  relationship
+) {
+  let body = {
+    user_id: user_id,
+    bio: bio,
+    work: work,
+    education: education,
+    city: city,
+    hometown: hometown,
+    relationship: relationship,
+  };
+
+  return fetch(`${serverURL}/api/profile/update/intro`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
 export function addFriend(user_id, friend_id) {
   let body = {
     user_id: user_id,
