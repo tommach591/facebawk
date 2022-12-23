@@ -1,15 +1,14 @@
 import "./Home.css";
 import LoginPage from "../LoginPage";
 import HomePage from "../HomePage";
+import { useUserData } from "../../utils/UserContext";
 
-function Home({ user, userData, changeUser, setSearch }) {
+function Home() {
+  const userData = useUserData();
+
   return (
     <div className="Home">
-      {user === "" ? (
-        <LoginPage changeUser={changeUser} />
-      ) : (
-        <HomePage userData={userData} changeUser={changeUser} />
-      )}
+      {Object.keys(userData).length === 0 ? <LoginPage /> : <HomePage />}
     </div>
   );
 }

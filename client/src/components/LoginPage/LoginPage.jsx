@@ -8,8 +8,10 @@ import {
 } from "../../utils/Account";
 import { deleteProfile, getAllProfile } from "../../utils/Profile";
 import SignUpForm from "../SignUpForm";
+import { useUserUpdate } from "../../utils/UserContext";
 
-function LoginPage({ changeUser, isMobile }) {
+function LoginPage() {
+  const changeUser = useUserUpdate();
   const [modalOn, setModalOn] = useState(false);
 
   const [loginEmail, setLoginEmail] = useState("");
@@ -125,7 +127,7 @@ function LoginPage({ changeUser, isMobile }) {
     return <div className="LoginPage"></div>;
   };
 
-  return isMobile ? getMobile() : getWeb();
+  return getWeb();
 }
 
 export default LoginPage;

@@ -10,22 +10,26 @@ function Post({ post }) {
 
   useEffect(() => {
     getProfile(post.user_id).then((res) => {
-      console.log(res);
-      setOwner(res);
+      res ? setOwner(res) : setOwner("");
     });
   }, [post]);
 
-  return (
+  return owner ? (
     <div className="Post">
       <div className="Author">
         <img
           src={
-            "https://api.iconify.design/bi:person-circle.svg?color=%23888888"
+            owner.pfp
+              ? owner.pfp
+              : "https://api.iconify.design/bi:person-circle.svg?color=%23888888"
           }
           alt="PFP"
+          onClick={() => {
+            navigate(`/profile/?user=${post.user_id}`);
+          }}
         />
         <div className="PostInfo">
-          {owner ? (
+          {owner !== "" ? (
             <h1
               className="Name User"
               onClick={() => {
@@ -50,6 +54,8 @@ function Post({ post }) {
         )}
       </div>
     </div>
+  ) : (
+    <div />
   );
 }
 

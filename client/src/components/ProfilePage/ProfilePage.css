@@ -12,7 +12,11 @@
   position: relative;
   width: 100%;
   height: 30rem;
-  background: rgb(255, 250, 200);
+  background-image: linear-gradient(
+    rgb(255, 235, 200),
+    rgb(255, 250, 200),
+    rgb(255, 250, 200)
+  );
 
   display: flex;
   justify-content: center;
@@ -22,7 +26,7 @@
 
 .BannerPicture {
   width: 75%;
-  height: 75%;
+  height: 22rem;
 }
 
 .BannerPicture > * {
@@ -32,7 +36,7 @@
 }
 
 .BannerPicture > div {
-  background: rgb(92, 92, 92);
+  background: rgb(255, 255, 255);
 }
 
 .ProfilePicture {
@@ -59,12 +63,54 @@
 
 .DisplayName {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 32px;
+  font-size: 38px;
   font-weight: bold;
 
   position: absolute;
-  left: 540px;
-  top: 375px;
+  left: 545px;
+  top: 395px;
+}
+
+.AddFriend {
+  width: 10rem;
+  height: 2.25rem;
+
+  margin: 0.5rem;
+  margin-top: 2rem;
+
+  background: rgb(92, 92, 92);
+  border: 0px;
+  border-radius: 5px;
+
+  position: absolute;
+  left: 1450px;
+  top: 362px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AddFriend > h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  margin: 0.25rem;
+}
+
+.AddFriend > img {
+  width: 1.25rem;
+}
+
+.AddFriend:hover {
+  cursor: pointer;
+  background: rgb(73, 73, 73);
+}
+
+.AddFriend:active {
+  cursor: pointer;
+  background: rgb(63, 63, 63);
 }
 
 .ProfileContent {

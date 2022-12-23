@@ -1,0 +1,123 @@
+.SearchPage {
+  min-height: 101vh;
+  position: relative;
+  overflow-x: hidden;
+
+  background: rgb(255, 250, 230);
+}
+
+.ListOfFoundUsers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 5rem;
+}
+
+.FoundUsers {
+  height: 3rem;
+  width: 42rem;
+
+  position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  border: 1px solid rgb(120, 120, 120);
+  border-radius: 10px;
+
+  background: rgb(255, 250, 200);
+  margin: 0.5rem;
+
+  padding: 1rem;
+}
+
+.FoundUsers > img {
+  width: 3.5rem;
+  background: white;
+  border-radius: 50%;
+}
+
+.FoundUsers > img:hover {
+  cursor: pointer;
+}
+
+.UserInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.UserInfo:hover {
+  cursor: pointer;
+}
+
+.UserName {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.FriendCount {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.AddFoundUser {
+  width: 10rem;
+  height: 2.25rem;
+
+  margin: 0.5rem;
+
+  background: rgb(92, 92, 92);
+  border: 0px;
+  border-radius: 5px;
+
+  position: absolute;
+  right: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AddFoundUser > h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  margin: 0.25rem;
+}
+
+.AddFoundUser > img {
+  width: 1.25rem;
+}
+
+.AddFoundUser:hover {
+  cursor: pointer;
+  background: rgb(73, 73, 73);
+}
+
+.AddFoundUser:active {
+  cursor: pointer;
+  background: rgb(63, 63, 63);
+}
+
+.AddFoundUser:disabled {
+  cursor: default;
+  background: rgb(189, 189, 189);
+}
+
+.Nothing {
+  margin: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+}

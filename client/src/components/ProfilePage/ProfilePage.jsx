@@ -2,14 +2,19 @@ import { useEffect, useState, useCallback } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { getPostByUser } from "../../utils/Post";
 import { getProfile } from "../../utils/Profile";
-import Header from "../Header";
 import CreatePost from "../CreatePost";
 import EditDetails from "../EditDetails";
 import Post from "../Post";
 import "./ProfilePage.css";
+import { useRefresh, useUser, useUserData } from "../../utils/UserContext";
 
-function ProfilePage({ user, userData, changeUser, setSearch, setUserData }) {
+function ProfilePage() {
+  const user = useUser();
+  const userData = useUserData();
+  const refreshUserData = useRefresh();
+
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("user");
   const isOwner = user === id;
@@ -39,8 +44,8 @@ function ProfilePage({ user, userData, changeUser, setSearch, setUserData }) {
   };
 
   let updateProfile = (newProfile) => {
-    setUserData(newProfile);
     setProfileData(newProfile);
+    refreshUserData();
   };
 
   useEffect(() => {
@@ -56,11 +61,6 @@ function ProfilePage({ user, userData, changeUser, setSearch, setUserData }) {
 
   return Object.keys(profileData).length !== 0 ? (
     <div className="ProfilePage">
-      <Header
-        userData={userData}
-        changeUser={changeUser}
-        setSearch={setSearch}
-      />
       {isOwner ? (
         <CreatePost
           userData={userData}
@@ -100,6 +100,17 @@ function ProfilePage({ user, userData, changeUser, setSearch, setUserData }) {
           />
         </div>
         <h1 className="DisplayName">{`${profileData.first} ${profileData.last}`}</h1>
+        {isOwner ? (
+          <div />
+        ) : (
+          <button className="AddFriend">
+            <h2>Add Friend</h2>
+            <img
+              src="https://api.iconify.design/ic:baseline-person-add-alt-1.svg?color=%23ffffff"
+              alt=""
+            />
+          </button>
+        )}
       </div>
       <div className="ProfileContent">
         <div className="AboutMe">

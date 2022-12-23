@@ -1,0 +1,88 @@
+.FriendRequest {
+  height: 3rem;
+  width: 42rem;
+
+  position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  border: 1px solid rgb(120, 120, 120);
+  border-radius: 10px;
+
+  background: rgb(255, 250, 200);
+  margin: 0.5rem;
+
+  padding: 1rem;
+}
+
+.FriendRequest > img {
+  width: 3.5rem;
+  background: white;
+  border-radius: 50%;
+}
+
+.FriendRequest > img:hover {
+  cursor: pointer;
+}
+
+.FriendRequestButtonContainer {
+  display: flex;
+  position: absolute;
+  right: 1rem;
+}
+
+.FriendRequestButton {
+  width: 7rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  margin: 0.5rem;
+}
+
+.FriendRequestButton:hover {
+  cursor: pointer;
+}
+
+.FriendRequestButton:active {
+  cursor: pointer;
+}
+
+.Accept {
+  background: rgb(80, 225, 90);
+}
+
+.Accept:hover {
+  background: rgb(70, 200, 80);
+}
+
+.Accept:active {
+  background: rgb(60, 175, 70);
+}
+
+.Decline {
+  background: rgb(225, 80, 80);
+}
+
+.Decline:hover {
+  background: rgb(200, 70, 70);
+}
+
+.Decline:active {
+  background: rgb(175, 60, 60);
+}
+
+.FriendRequestButton > h2 {
+  color: white;
+  margin: 0.25rem;
+}
+
+.FriendRequestButton > img {
+  width: 1.25rem;
+  color: white;
+}

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { updateIntro } from "../../utils/Profile";
 import Modal from "../Modal";
 import "./EditDetails.css";
 
 function EditDetails({ userData, modalOn, setModalOn, updateProfile }) {
-  const navigate = useNavigate();
   const [bio, setBio] = useState("");
   const [work, setWork] = useState("");
   const [education, setEducation] = useState("");

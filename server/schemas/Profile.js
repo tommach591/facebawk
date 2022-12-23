@@ -32,7 +32,11 @@ const ProfileSchema = new Schema({
   },
   friends: {
     type: Array,
-    required: false,
+    required: true,
+  },
+  friend_requests: {
+    type: Array,
+    required: true,
   },
   pfp: {
     type: String,
@@ -72,19 +76,19 @@ const ProfileSchema = new Schema({
   },
   photos: {
     type: Array,
-    required: false,
+    required: true,
   },
   posts_made: {
     type: Array,
-    required: false,
+    required: true,
   },
   posts_liked: {
     type: Array,
-    required: false,
+    required: true,
   },
   posts_shared: {
     type: Array,
-    required: false,
+    required: true,
   },
 });
 

@@ -1,0 +1,16 @@
+.FriendRequestPage {
+  min-height: 101vh;
+  position: relative;
+  overflow-x: hidden;
+
+  background: rgb(255, 250, 230);
+}
+
+.ListOfFriendRequests {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 5rem;
+}

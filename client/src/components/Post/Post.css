@@ -28,11 +28,15 @@
   border-radius: 50%;
 }
 
+.Author > img {
+  cursor: pointer;
+}
+
 .Name {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
   margin-bottom: 0.25rem;
 }
 
@@ -43,8 +47,8 @@
 .Date {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
 }
 
 .PostContent {

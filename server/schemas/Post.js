@@ -28,11 +28,11 @@ const PostSchema = new Schema({
   },
   replies: {
     type: Array,
-    required: false,
+    required: true,
   },
   likes: {
     type: Array,
-    required: false,
+    required: true,
   },
   shares: {
     type: Array,

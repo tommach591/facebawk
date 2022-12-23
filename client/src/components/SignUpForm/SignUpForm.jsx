@@ -9,9 +9,10 @@ function SignUpForm({ modalOn, setModalOn }) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [month, setMonth] = useState("0");
-  const [day, setDay] = useState("1");
-  const [year, setYear] = useState("1900");
+  const today = new Date(Date.now());
+  const [month, setMonth] = useState(today.getMonth().toString());
+  const [day, setDay] = useState(today.getDate().toString());
+  const [year, setYear] = useState(today.getFullYear().toString());
   const [gender, setGender] = useState("Female");
 
   const resetForm = () => {
@@ -143,10 +144,10 @@ function SignUpForm({ modalOn, setModalOn }) {
               }}
               value={year}
             >
-              {Array.from(Array(123).keys()).map((i, j) => {
+              {Array.from(Array(130).keys()).map((i, j) => {
                 return (
-                  <option key={j} value={j + 1900}>
-                    {j + 1900}
+                  <option key={j} value={today.getFullYear() - j}>
+                    {today.getFullYear() - j}
                   </option>
                 );
               })}

@@ -3,15 +3,19 @@ import HomeButton from "../HomeButton";
 import SearchBar from "../SearchBar/";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserData, useUserUpdate } from "../../utils/UserContext";
 
-function Header({ userData, changeUser, setSearch }) {
+function Header({ search, setSearch }) {
+  const userData = useUserData();
+  const changeUser = useUserUpdate();
+
   const navigate = useNavigate();
   const [dropdown, setDropdown] = useState(false);
 
   return (
     <div className="Header">
       <HomeButton />
-      <SearchBar setSearch={setSearch} />
+      <SearchBar search={search} setSearch={setSearch} />
       <div className="Update">
         <div
           className="Profile"
@@ -27,6 +31,13 @@ function Header({ userData, changeUser, setSearch }) {
             }
             alt="PFP"
           />
+          {userData.friend_requests.length > 0 ? (
+            <div className="Notifications AtProfile">
+              <h2>{userData.friend_requests.length}</h2>
+            </div>
+          ) : (
+            <div />
+          )}
         </div>
         {dropdown ? (
           <div className="Dropdown">
@@ -34,15 +45,33 @@ function Header({ userData, changeUser, setSearch }) {
               className="DropdownOption"
               onClick={() => {
                 navigate(`/profile/?user=${userData.user_id}`);
+                setDropdown(!dropdown);
               }}
             >
-              Account
+              Profile
+            </h1>
+            <h1
+              className="DropdownOption"
+              onClick={() => {
+                navigate("/requests");
+                setDropdown(!dropdown);
+              }}
+            >
+              Friend Requests
+              {userData.friend_requests.length > 0 ? (
+                <div className="Notifications AtDropdown">
+                  <h2>{userData.friend_requests.length}</h2>
+                </div>
+              ) : (
+                <div />
+              )}
             </h1>
             <h1
               className="DropdownOption"
               onClick={() => {
                 changeUser("");
                 navigate("/");
+                setDropdown(!dropdown);
               }}
             >
               Logout

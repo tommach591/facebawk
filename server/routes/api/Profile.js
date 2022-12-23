@@ -23,6 +23,24 @@ router.get("/get/:user_id", (req, res) => {
     });
 });
 
+router.get("/search/:query", (req, res) => {
+  const { query } = req.params;
+
+  console.log(`Hit at http://localhost:3001/api/profile/search/${query}`);
+  Profile.find({
+    $or: [
+      { first: { $regex: query, $options: "i" } },
+      { last: { $regex: query, $options: "i" } },
+    ],
+  })
+    .then((prof) => {
+      return res.json(prof);
+    })
+    .catch((err) => {
+      return res.status(404).json({ profile_not_found: "No profiles" });
+    });
+});
+
 router.post("/signup", (req, res) => {
   console.log("Hit at http://localhost:3001/api/profile/signup");
   const { user_id, email, first, last, birthdate, gender } = req.body;
@@ -36,6 +54,7 @@ router.post("/signup", (req, res) => {
     gender: gender,
     date_created: new Date(Date.now()),
     friends: [],
+    friend_requests: [],
     pfp: "",
     banner: "",
     bio: "",
@@ -74,13 +93,47 @@ router.post("/update/intro", (req, res) => {
   ).exec();
 });
 
-router.post("/update/friends", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/friends");
+router.post("/update/add_friend", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/profile/update/add_friend");
   const { user_id, new_friend } = req.body;
 
   Profile.findOneAndUpdate(
     { user_id: user_id },
-    { $push: { friends: new_friend } }
+    { $pull: { friend_requests: new_friend }, $push: { friends: new_friend } }
+  ).exec();
+});
+
+router.post("/update/remove_friend", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/profile/update/remove_friend");
+  const { user_id, new_friend } = req.body;
+
+  Profile.findOneAndUpdate(
+    { user_id: user_id },
+    { $pull: { friend: new_friend } }
+  ).exec();
+});
+
+router.post("/update/add_friend_request", (req, res) => {
+  console.log(
+    "Hit at http://localhost:3001/api/profile/update/add_friend_request"
+  );
+  const { user_id, new_friend } = req.body;
+
+  Profile.findOneAndUpdate(
+    { user_id: user_id },
+    { $push: { friend_requests: new_friend } }
+  ).exec();
+});
+
+router.post("/update/remove_friend_request", (req, res) => {
+  console.log(
+    "Hit at http://localhost:3001/api/profile/update/remove_friend_request"
+  );
+  const { user_id, new_friend } = req.body;
+
+  Profile.findOneAndUpdate(
+    { user_id: user_id },
+    { $pull: { friend_requests: new_friend } }
   ).exec();
 });
 
@@ -98,71 +151,8 @@ router.post("/update/banner", (req, res) => {
   Profile.findOneAndUpdate({ user_id: user_id }, { banner: new_banner }).exec();
 });
 
-router.post("/update/bio", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/bio");
-  const { user_id, new_bio } = req.body;
-
-  Profile.findOneAndUpdate({ user_id: user_id }, { bio: new_bio }).exec();
-});
-
-router.post("/update/work", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/work");
-  const { user_id, new_work } = req.body;
-
-  Profile.findOneAndUpdate({ user_id: user_id }, { work: new_work }).exec();
-});
-
-router.post("/update/education", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/education");
-  const { user_id, new_education } = req.body;
-
-  Profile.findOneAndUpdate(
-    { user_id: user_id },
-    { education: new_education }
-  ).exec();
-});
-
-router.post("/update/city", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/city");
-  const { user_id, new_city } = req.body;
-
-  Profile.findOneAndUpdate({ user_id: user_id }, { city: new_city }).exec();
-});
-
-router.post("/update/hometown", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/hometown");
-  const { user_id, new_hometown } = req.body;
-
-  Profile.findOneAndUpdate(
-    { user_id: user_id },
-    { hometown: new_hometown }
-  ).exec();
-});
-
-router.post("/update/relationship", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/relationship");
-  const { user_id, new_relationship } = req.body;
-
-  Profile.findOneAndUpdate(
-    { user_id: user_id },
-    { relationship: new_relationship }
-  ).exec();
-});
-
-router.post("/update/name_pronunciation", (req, res) => {
-  console.log(
-    "Hit at http://localhost:3001/api/profile/update/name_pronunciation"
-  );
-  const { user_id, new_name_pronunciation } = req.body;
-
-  Profile.findOneAndUpdate(
-    { user_id: user_id },
-    { name_pronunciation: new_name_pronunciation }
-  ).exec();
-});
-
-router.post("/update/photos", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/photos");
+router.post("/update/add_photo", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/profile/update/add_photo");
   const { user_id, new_photo } = req.body;
 
   Profile.findOneAndUpdate(
@@ -171,8 +161,8 @@ router.post("/update/photos", (req, res) => {
   ).exec();
 });
 
-router.post("/update/posts_made", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/posts_made");
+router.post("/update/add_new_post", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/profile/update/add_new_post");
   const { user_id, new_post } = req.body;
 
   Profile.findOneAndUpdate(
@@ -181,8 +171,8 @@ router.post("/update/posts_made", (req, res) => {
   ).exec();
 });
 
-router.post("/update/posts_liked", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/posts_liked");
+router.post("/update/add_post_liked", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/profile/update/add_post_liked");
   const { user_id, new_post_liked } = req.body;
 
   Profile.findOneAndUpdate(
@@ -191,8 +181,10 @@ router.post("/update/posts_liked", (req, res) => {
   ).exec();
 });
 
-router.post("/update/posts_shared", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/posts_shared");
+router.post("/update/add_post_shared", (req, res) => {
+  console.log(
+    "Hit at http://localhost:3001/api/profile/update/add_post_shared"
+  );
   const { user_id, new_post_shared } = req.body;
 
   Profile.findOneAndUpdate(
