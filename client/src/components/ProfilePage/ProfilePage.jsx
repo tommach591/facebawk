@@ -1,17 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { getPostByUser } from "../../utils/Post";
-import { getProfile } from "../../utils/Profile";
+import { getProfile, makeFriendRequest } from "../../utils/Profile";
 import CreatePost from "../CreatePost";
 import EditDetails from "../EditDetails";
 import Post from "../Post";
 import "./ProfilePage.css";
-import { useRefresh, useUser, useUserData } from "../../utils/UserContext";
+import { useUser, useUserData } from "../../utils/UserContext";
 
 function ProfilePage() {
   const user = useUser();
   const userData = useUserData();
-  const refreshUserData = useRefresh();
 
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
@@ -22,6 +21,7 @@ function ProfilePage() {
   const [profilePosts, setProfilePosts] = useState([]);
   const [postModalOn, setPostModalOn] = useState(false);
   const [editDetailsModalOn, setEditDetailsModalOn] = useState(false);
+  const [reload, setReload] = useState(false);
 
   const loadUserPosts = useCallback(() => {
     if (Object.keys(profileData).length !== 0) {
@@ -45,7 +45,6 @@ function ProfilePage() {
 
   let updateProfile = (newProfile) => {
     setProfileData(newProfile);
-    refreshUserData();
   };
 
   useEffect(() => {
@@ -53,7 +52,7 @@ function ProfilePage() {
       if (res) setProfileData(res);
       else navigate(`/profile/?user=${user}`);
     });
-  }, [id, navigate, user]);
+  }, [id, navigate, user, reload]);
 
   useEffect(() => {
     loadUserPosts();
@@ -73,7 +72,6 @@ function ProfilePage() {
       )}
       {isOwner ? (
         <EditDetails
-          userData={userData}
           modalOn={editDetailsModalOn}
           setModalOn={setEditDetailsModalOn}
           updateProfile={updateProfile}
@@ -100,13 +98,44 @@ function ProfilePage() {
           />
         </div>
         <h1 className="DisplayName">{`${profileData.first} ${profileData.last}`}</h1>
+        <h1 className="DisplayFriendCount">{`${profileData.friends.length} friends`}</h1>
         {isOwner ? (
           <div />
         ) : (
-          <button className="AddFriend">
-            <h2>Add Friend</h2>
+          <button
+            className="AddFriend AtProfilePage"
+            disabled={
+              profileData.friends.includes(user) ||
+              profileData.friend_requests.includes(user)
+            }
+            onClick={(event) => {
+              makeFriendRequest(profileData.user_id, user);
+              setReload(true);
+              alert("Request Sent!");
+            }}
+            style={
+              profileData.friends.includes(user)
+                ? { background: "rgb(80, 225, 90)" }
+                : profileData.friend_requests.includes(user)
+                ? { background: "rgb(189, 189, 189)" }
+                : { background: "rgb(92, 92, 92)" }
+            }
+          >
+            <h2>
+              {profileData.friends.includes(user)
+                ? "Friends"
+                : profileData.friend_requests.includes(user)
+                ? "Request Sent"
+                : "Add Friend"}
+            </h2>
             <img
-              src="https://api.iconify.design/ic:baseline-person-add-alt-1.svg?color=%23ffffff"
+              src={
+                profileData.friends.includes(user)
+                  ? "https://api.iconify.design/ic:baseline-person.svg?color=%23ffffff"
+                  : profileData.friend_requests.includes(user)
+                  ? "https://api.iconify.design/mdi:account-check.svg?color=%23ffffff"
+                  : "https://api.iconify.design/ic:baseline-person-add-alt-1.svg?color=%23ffffff"
+              }
               alt=""
             />
           </button>

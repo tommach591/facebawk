@@ -24,54 +24,61 @@ function SearchPage() {
     <div className="SearchPage">
       <div className="ListOfFoundUsers">
         {found.length > 0 ? (
-          found.map((profile) => {
+          found.map((profileData) => {
             return (
-              <div className="FoundUsers" key={profile.user_id}>
+              <div className="FoundUsers" key={profileData.user_id}>
                 <img
                   src={
-                    profile.pfp
-                      ? profile.pfp
+                    profileData.pfp
+                      ? profileData.pfp
                       : "https://api.iconify.design/bi:person-circle.svg?color=%23888888"
                   }
                   alt=""
                   onClick={() => {
-                    navigate(`/profile/?user=${profile.user_id}`);
+                    navigate(`/profile/?user=${profileData.user_id}`);
                   }}
                 />
                 <div className="UserInfo">
                   <h1
                     className="UserName"
                     onClick={() => {
-                      navigate(`/profile/?user=${profile.user_id}`);
+                      navigate(`/profile/?user=${profileData.user_id}`);
                     }}
-                  >{`${profile.first} ${profile.last}`}</h1>
-                  <h1 className="FriendCount">{`${profile.friends.length} friends`}</h1>
+                  >{`${profileData.first} ${profileData.last}`}</h1>
+                  <h1 className="FriendCount">{`${profileData.friends.length} friends`}</h1>
                 </div>
-                {profile.user_id !== user ? (
+                {profileData.user_id !== user ? (
                   <button
-                    className="AddFoundUser"
+                    className="AddFriend AtSearchPage"
                     disabled={
-                      profile.friends.includes(user) ||
-                      profile.friend_requests.includes(user)
+                      profileData.friends.includes(user) ||
+                      profileData.friend_requests.includes(user)
                     }
                     onClick={(event) => {
-                      makeFriendRequest(profile.user_id, user);
+                      makeFriendRequest(profileData.user_id, user);
                       setReload(true);
                       alert("Request Sent!");
                     }}
+                    style={
+                      profileData.friends.includes(user)
+                        ? { background: "rgb(80, 225, 90)" }
+                        : profileData.friend_requests.includes(user)
+                        ? { background: "rgb(189, 189, 189)" }
+                        : { background: "rgb(92, 92, 92)" }
+                    }
                   >
                     <h2>
-                      {profile.friends.includes(user)
+                      {profileData.friends.includes(user)
                         ? "Friends"
-                        : profile.friend_requests.includes(user)
+                        : profileData.friend_requests.includes(user)
                         ? "Request Sent"
                         : "Add Friend"}
                     </h2>
                     <img
                       src={
-                        profile.friends.includes(user)
+                        profileData.friends.includes(user)
                           ? "https://api.iconify.design/ic:baseline-person.svg?color=%23ffffff"
-                          : profile.friend_requests.includes(user)
+                          : profileData.friend_requests.includes(user)
                           ? "https://api.iconify.design/mdi:account-check.svg?color=%23ffffff"
                           : "https://api.iconify.design/ic:baseline-person-add-alt-1.svg?color=%23ffffff"
                       }

@@ -5,12 +5,13 @@ import {
   declineFriendRequest,
   getProfile,
 } from "../../utils/Profile";
-import { useUser } from "../../utils/UserContext";
+import { useUser, useRefresh } from "../../utils/UserContext";
 import "./FriendRequest.css";
 
 function FriendRequest({ id }) {
   const navigate = useNavigate();
   const user = useUser();
+  const refreshUserData = useRefresh();
   const [profile, setProfile] = useState();
 
   useEffect(() => {
@@ -46,7 +47,11 @@ function FriendRequest({ id }) {
           className="FriendRequestButton Accept"
           onClick={() => {
             addFriend(user, id).then((res) => {
-              addFriend(id, user).then((res) => {});
+              console.log(res);
+              addFriend(id, user).then((res) => {
+                console.log(res);
+                refreshUserData();
+              });
             });
           }}
         >
@@ -59,7 +64,10 @@ function FriendRequest({ id }) {
         <button
           className="FriendRequestButton Decline"
           onClick={() => {
-            declineFriendRequest(user, id).then((res) => {});
+            declineFriendRequest(user, id).then((res) => {
+              console.log(res);
+              refreshUserData();
+            });
           }}
         >
           <h2>Decline</h2>

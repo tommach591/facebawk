@@ -32,7 +32,6 @@ export function UserProvider({ children }) {
 
   const [user, setUser] = useState(sessionStorage.getItem("id"));
   const [userData, setUserData] = useState({});
-  const [refresh, setRefresh] = useState(false);
 
   function changeUser(newUser) {
     setUser(newUser);
@@ -45,16 +44,18 @@ export function UserProvider({ children }) {
   }
 
   function refreshUserData() {
-    setRefresh(true);
+    if (user !== "")
+      getProfile(user).then((res) => {
+        res ? setUserData(res) : setUserData({});
+      });
   }
 
   useEffect(() => {
     if (user !== "")
       getProfile(user).then((res) => {
         res ? setUserData(res) : setUserData({});
-        setRefresh(false);
       });
-  }, [user, refresh]);
+  }, [user]);
 
   return (
     <UserContext.Provider value={user}>

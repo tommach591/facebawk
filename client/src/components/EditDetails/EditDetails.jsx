@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { updateIntro } from "../../utils/Profile";
+import { useRefresh, useUserData } from "../../utils/UserContext";
 import Modal from "../Modal";
 import "./EditDetails.css";
 
-function EditDetails({ userData, modalOn, setModalOn, updateProfile }) {
+function EditDetails({ modalOn, setModalOn, updateProfile }) {
+  const userData = useUserData();
+  const refreshUserData = useRefresh();
   const [bio, setBio] = useState("");
   const [work, setWork] = useState("");
   const [education, setEducation] = useState("");
@@ -29,7 +32,9 @@ function EditDetails({ userData, modalOn, setModalOn, updateProfile }) {
       city,
       hometown,
       relationship
-    );
+    ).then((res) => {
+      refreshUserData();
+    });
     let newProfile = JSON.parse(JSON.stringify(userData));
     newProfile.bio = bio;
     newProfile.work = work;

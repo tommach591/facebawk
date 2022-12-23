@@ -91,6 +91,7 @@ router.post("/update/intro", (req, res) => {
       relationship: relationship,
     }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/add_friend", (req, res) => {
@@ -99,8 +100,12 @@ router.post("/update/add_friend", (req, res) => {
 
   Profile.findOneAndUpdate(
     { user_id: user_id },
-    { $pull: { friend_requests: new_friend }, $push: { friends: new_friend } }
+    {
+      $pull: { friend_requests: new_friend },
+      $push: { friends: new_friend },
+    }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/remove_friend", (req, res) => {
@@ -111,6 +116,7 @@ router.post("/update/remove_friend", (req, res) => {
     { user_id: user_id },
     { $pull: { friend: new_friend } }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/add_friend_request", (req, res) => {
@@ -123,6 +129,7 @@ router.post("/update/add_friend_request", (req, res) => {
     { user_id: user_id },
     { $push: { friend_requests: new_friend } }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/remove_friend_request", (req, res) => {
@@ -135,6 +142,7 @@ router.post("/update/remove_friend_request", (req, res) => {
     { user_id: user_id },
     { $pull: { friend_requests: new_friend } }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/pfp", (req, res) => {
@@ -142,6 +150,7 @@ router.post("/update/pfp", (req, res) => {
   const { user_id, new_pfp } = req.body;
 
   Profile.findOneAndUpdate({ user_id: user_id }, { pfp: new_pfp }).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/banner", (req, res) => {
@@ -149,6 +158,7 @@ router.post("/update/banner", (req, res) => {
   const { user_id, new_banner } = req.body;
 
   Profile.findOneAndUpdate({ user_id: user_id }, { banner: new_banner }).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/add_photo", (req, res) => {
@@ -159,6 +169,7 @@ router.post("/update/add_photo", (req, res) => {
     { user_id: user_id },
     { $push: { photos: new_photo } }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/add_new_post", (req, res) => {
@@ -169,6 +180,7 @@ router.post("/update/add_new_post", (req, res) => {
     { user_id: user_id },
     { $push: { posts_made: new_post } }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/add_post_liked", (req, res) => {
@@ -179,6 +191,7 @@ router.post("/update/add_post_liked", (req, res) => {
     { user_id: user_id },
     { $push: { posts_liked: new_post_liked } }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.post("/update/add_post_shared", (req, res) => {
@@ -191,6 +204,7 @@ router.post("/update/add_post_shared", (req, res) => {
     { user_id: user_id },
     { $push: { posts_shared: new_post_shared } }
   ).exec();
+  return res.json({ success: true });
 });
 
 router.delete("/delete", (req, res) => {

@@ -38,7 +38,6 @@ function HomePage() {
   return userData ? (
     <div className="HomePage">
       <CreatePost
-        userData={userData}
         modalOn={modalOn}
         setModalOn={setModalOn}
         appendNewPost={appendNewPost}

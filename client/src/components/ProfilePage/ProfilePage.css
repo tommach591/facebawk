@@ -62,13 +62,25 @@
 }
 
 .DisplayName {
+  text-align: left;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 38px;
   font-weight: bold;
 
   position: absolute;
   left: 545px;
-  top: 395px;
+  top: 375px;
+}
+
+.DisplayFriendCount {
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: rgb(50, 50, 50);
+
+  position: absolute;
+  left: 548px;
+  top: 420px;
 }
 
 .AddFriend {
@@ -81,10 +93,6 @@
   background: rgb(92, 92, 92);
   border: 0px;
   border-radius: 5px;
-
-  position: absolute;
-  left: 1450px;
-  top: 362px;
 
   display: flex;
   align-items: center;
@@ -111,6 +119,16 @@
 .AddFriend:active {
   cursor: pointer;
   background: rgb(63, 63, 63);
+}
+
+.AddFriend:disabled {
+  cursor: default;
+}
+
+.AtProfilePage {
+  position: absolute;
+  left: 1450px;
+  top: 362px;
 }
 
 .ProfileContent {

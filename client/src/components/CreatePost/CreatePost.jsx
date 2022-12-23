@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { createNewPost } from "../../utils/Post";
 import { addNewPost } from "../../utils/Profile";
+import { useUserData } from "../../utils/UserContext";
 import Modal from "../Modal";
 import "./CreatePost.css";
 
-function CreatePost({ userData, modalOn, setModalOn, appendNewPost }) {
+function CreatePost({ modalOn, setModalOn, appendNewPost }) {
+  const userData = useUserData();
   const [content, setContent] = useState("");
 
   const handleCreatePost = () => {

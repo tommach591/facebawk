@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProfile } from "../../utils/Profile";
+import { useUser } from "../../utils/UserContext";
 import "./Post.css";
 
 function Post({ post }) {
   const navigate = useNavigate();
-  const [owner, setOwner] = useState();
-  const [datePosted, setDatePosted] = useState(new Date(post.date_created));
+  const user = useUser();
+  const [owner, setOwner] = useState({});
+  const datePosted = new Date(post.date_created);
 
   useEffect(() => {
     getProfile(post.user_id).then((res) => {
-      res ? setOwner(res) : setOwner("");
+      res ? setOwner(res) : setOwner({});
     });
   }, [post]);
 
-  return owner ? (
+  return Object.keys(owner).length !== 0 ? (
     <div className="Post">
       <div className="Author">
         <img
@@ -29,7 +31,7 @@ function Post({ post }) {
           }}
         />
         <div className="PostInfo">
-          {owner !== "" ? (
+          {Object.keys(owner).length !== 0 ? (
             <h1
               className="Name User"
               onClick={() => {
@@ -47,7 +49,7 @@ function Post({ post }) {
       <div className="PostInteractions">
         <h1 className="PostLike">Like</h1>
         <h1 className="PostComment">Comment</h1>
-        {owner && post.user_id === owner.user_id ? (
+        {Object.keys(owner).length !== 0 && user === owner.user_id ? (
           <div />
         ) : (
           <h1 className="PostShare">Share</h1>

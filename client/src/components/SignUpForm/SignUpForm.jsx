@@ -20,9 +20,9 @@ function SignUpForm({ modalOn, setModalOn }) {
     setLastName("");
     setEmail("");
     setPassword("");
-    setMonth("0");
-    setDay("1");
-    setYear("1900");
+    setMonth(today.getMonth().toString());
+    setDay(today.getDate().toString());
+    setYear(today.getFullYear().toString());
     setGender("Female");
     setModalOn(false);
   };

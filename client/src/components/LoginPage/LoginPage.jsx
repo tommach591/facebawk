@@ -29,10 +29,11 @@ function LoginPage() {
 
   const handleDeleteAccount = () => {
     deleteAccount(loginEmail, loginPassword).then((res) => {
-      console.log(res);
       if (res.success === true) {
         deleteProfile(loginEmail).then((res) => {
           alert("Account has been deleted.");
+          setLoginEmail("");
+          setLoginPassword("");
         });
       } else alert("Account does not exist or invalid password.");
     });
@@ -121,10 +122,6 @@ function LoginPage() {
         <SignUpForm modalOn={modalOn} setModalOn={setModalOn} />
       </div>
     );
-  };
-
-  const getMobile = () => {
-    return <div className="LoginPage"></div>;
   };
 
   return getWeb();

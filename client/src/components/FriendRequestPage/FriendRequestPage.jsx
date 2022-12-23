@@ -1,8 +1,7 @@
 import "./FriendRequestPage.css";
 import { useUserData } from "../../utils/UserContext";
 import FriendRequest from "../FriendRequest/";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function FriendRequestPage() {
   const userData = useUserData();
@@ -19,7 +18,7 @@ function FriendRequestPage() {
       <div className="ListOfFriendRequests">
         {friendReq.length > 0 ? (
           friendReq.map((id) => {
-            return <FriendRequest key={id} id={id} />;
+            return <FriendRequest key={id} id={id} userData={userData} />;
           })
         ) : (
           <h1 className="Nothing">No friend requests :(</h1>
