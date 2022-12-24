@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createNewPost } from "../../utils/Post";
-import { addNewPost } from "../../utils/Profile";
 import { useUserData } from "../../utils/UserContext";
 import Modal from "../Modal";
 import "./CreatePost.css";
@@ -16,7 +15,6 @@ function CreatePost({ modalOn, setModalOn, appendNewPost }) {
     }
     createNewPost(userData.user_id, content).then((res) => {
       appendNewPost(res);
-      addNewPost(userData.user_id, res._id);
       setModalOn(false);
     });
   };

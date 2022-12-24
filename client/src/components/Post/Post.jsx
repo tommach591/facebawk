@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { nFormatter } from "../../utils/helper";
+import { likePost, unlikePost } from "../../utils/Post";
 import { getProfile } from "../../utils/Profile";
 import { useUser } from "../../utils/UserContext";
 import "./Post.css";
@@ -9,6 +11,8 @@ function Post({ post }) {
   const user = useUser();
   const [owner, setOwner] = useState({});
   const datePosted = new Date(post.date_created);
+  const [likes, setLikes] = useState([...post.likes]);
+  const [replies, setReplies] = useState([...post.replies]);
 
   useEffect(() => {
     getProfile(post.user_id).then((res) => {
@@ -45,15 +49,47 @@ function Post({ post }) {
         </div>
       </div>
       <h1 className="PostContent">{post.content}</h1>
+      {likes.length > 0 ? (
+        <div className="PostLikes">
+          <img
+            src="https://api.iconify.design/octicon:thumbsup-16.svg?color=%23646464"
+            alt=""
+          />
+          <h2>{nFormatter(likes.length, 2)}</h2>
+        </div>
+      ) : (
+        <div />
+      )}
       <div className="Line" style={{ width: "95%" }} />
       <div className="PostInteractions">
-        <h1 className="PostLike">Like</h1>
-        <h1 className="PostComment">Comment</h1>
-        {Object.keys(owner).length !== 0 && user === owner.user_id ? (
-          <div />
+        {likes.includes(user) ? (
+          <h1
+            className="PostLike"
+            onClick={() => {
+              let newLikes = [...likes];
+              newLikes.splice(newLikes.indexOf(user), 1);
+              setLikes(newLikes);
+              unlikePost(post._id, user);
+            }}
+          >
+            {`Unlike`}
+          </h1>
         ) : (
-          <h1 className="PostShare">Share</h1>
+          <h1
+            className="PostLike"
+            onClick={() => {
+              setLikes([...likes, user]);
+              likePost(post._id, user);
+            }}
+          >
+            {`Like`}
+          </h1>
         )}
+        <h1 className="PostComment">
+          {replies.length > 0
+            ? `Comments (${nFormatter(replies.length, 2)})`
+            : "Comment"}
+        </h1>
       </div>
     </div>
   ) : (

@@ -78,18 +78,6 @@ const ProfileSchema = new Schema({
     type: Array,
     required: true,
   },
-  posts_made: {
-    type: Array,
-    required: true,
-  },
-  posts_liked: {
-    type: Array,
-    required: true,
-  },
-  posts_shared: {
-    type: Array,
-    required: true,
-  },
 });
 
 const Profile = mongoose.model("Profile", ProfileSchema);

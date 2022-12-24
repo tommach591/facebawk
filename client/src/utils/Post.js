@@ -58,6 +58,49 @@ export function createNewPost(user_id, content) {
     .catch((err) => console.error(err));
 }
 
+export function likePost(post_id, user_id) {
+  let body = {
+    post_id: post_id,
+    user_id: user_id,
+  };
+
+  return fetch(`${serverURL}/api/post/like`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      console.log(res);
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function unlikePost(post_id, user_id) {
+  let body = {
+    post_id: post_id,
+    user_id: user_id,
+  };
+
+  return fetch(`${serverURL}/api/post/unlike`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
 export function deleteAllPost() {
   return fetch(`${serverURL}/api/post/deleteAll`, {
     method: "DELETE",

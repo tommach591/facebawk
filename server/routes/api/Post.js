@@ -60,16 +60,85 @@ router.get("/newsfeed/:user_id", (req, res) => {
 
 router.post("/post", (req, res) => {
   console.log("Hit at http://localhost:3001/api/post/post");
+  const { user_id, content } = req.body;
 
   const newPost = new Post({
-    user_id: req.body.user_id,
+    user_id: user_id,
     type: "post",
-    content: req.body.content,
+    content: content,
     date_created: new Date(Date.now()),
     attachment: "",
     replies: [],
     likes: [],
     shares: [],
+  });
+
+  newPost.save().then((post) => {
+    return res.json(post);
+  });
+});
+
+router.post("/like", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/like");
+  const { post_id, user_id } = req.body;
+
+  Post.findOneAndUpdate(
+    { _id: post_id },
+    {
+      $push: { likes: user_id },
+    }
+  )
+    .exec()
+    .then((result) => res.json(result));
+});
+
+router.post("/unlike", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/unlike");
+  const { post_id, user_id } = req.body;
+
+  Post.findOneAndUpdate(
+    { _id: post_id },
+    {
+      $pull: { likes: user_id },
+    }
+  )
+    .exec()
+    .then((result) => res.json(result));
+});
+
+router.post("/comment", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/comment");
+  const { user_id, parent_id, content } = req.body;
+
+  const newPost = new Post({
+    user_id: user_id,
+    parent_id: parent_id,
+    type: "comment",
+    content: content,
+    date_created: new Date(Date.now()),
+    attachment: "",
+    replies: [],
+    likes: [],
+  });
+
+  newPost.save().then((post) => {
+    return res.json(post);
+  });
+});
+
+router.post("/reply", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/reply");
+  const { user_id, parent_id, content } = req.body;
+
+  const newPost = new Post({
+    user_id: user_id,
+    parent_id: parent_id,
+    type: "reply",
+    content: content,
+    date_created: new Date(Date.now()),
+    attachment: "",
+    replies: [],
+    likes: [],
   });
 
   newPost.save().then((post) => {

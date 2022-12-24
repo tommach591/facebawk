@@ -61,6 +61,34 @@
   white-space: pre-line;
 }
 
+.PostLikes {
+  width: 10rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 1rem;
+
+  position: relative;
+  left: -15rem;
+}
+
+.PostLikes > img {
+  width: 0.9rem;
+}
+
+.PostLikes > h2 {
+  width: 10rem;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: rgb(100, 100, 100);
+
+  text-align: left;
+  margin-left: 0.25rem;
+}
+
 .PostInteractions {
   width: 95%;
   display: flex;

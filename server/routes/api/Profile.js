@@ -65,9 +65,6 @@ router.post("/signup", (req, res) => {
     relationship: "",
     name_pronunciation: "",
     photos: [],
-    posts_made: [],
-    posts_liked: [],
-    posts_shared: [],
   });
 
   newProfile.save().then((prof) => {
@@ -168,41 +165,6 @@ router.post("/update/add_photo", (req, res) => {
   Profile.findOneAndUpdate(
     { user_id: user_id },
     { $push: { photos: new_photo } }
-  ).exec();
-  return res.json({ success: true });
-});
-
-router.post("/update/add_new_post", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/add_new_post");
-  const { user_id, new_post } = req.body;
-
-  Profile.findOneAndUpdate(
-    { user_id: user_id },
-    { $push: { posts_made: new_post } }
-  ).exec();
-  return res.json({ success: true });
-});
-
-router.post("/update/add_post_liked", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/profile/update/add_post_liked");
-  const { user_id, new_post_liked } = req.body;
-
-  Profile.findOneAndUpdate(
-    { user_id: user_id },
-    { $push: { posts_liked: new_post_liked } }
-  ).exec();
-  return res.json({ success: true });
-});
-
-router.post("/update/add_post_shared", (req, res) => {
-  console.log(
-    "Hit at http://localhost:3001/api/profile/update/add_post_shared"
-  );
-  const { user_id, new_post_shared } = req.body;
-
-  Profile.findOneAndUpdate(
-    { user_id: user_id },
-    { $push: { posts_shared: new_post_shared } }
   ).exec();
   return res.json({ success: true });
 });
