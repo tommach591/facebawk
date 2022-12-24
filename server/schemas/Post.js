@@ -26,17 +26,9 @@ const PostSchema = new Schema({
     type: String,
     required: false,
   },
-  replies: {
-    type: Array,
-    required: true,
-  },
   likes: {
     type: Array,
     required: true,
-  },
-  shares: {
-    type: Array,
-    required: false,
   },
 });
 

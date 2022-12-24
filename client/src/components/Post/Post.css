@@ -12,6 +12,7 @@
 
   background: rgb(255, 250, 200);
   margin: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .Author {
@@ -94,8 +95,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  margin-bottom: 0.5rem;
 }
 
 .PostInteractions > h1 {
@@ -105,7 +104,7 @@
   height: 1.75rem;
 
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   margin-left: auto;
   margin-right: auto;
 
@@ -119,4 +118,49 @@
 .PostInteractions > h1:hover {
   cursor: pointer;
   background: rgb(216, 211, 160);
+}
+
+.PostComments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.WriteAComment {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.WriteAComment > img {
+  width: 2rem;
+  background: white;
+  border-radius: 50%;
+}
+
+.WriteAComment > input {
+  width: 82%;
+  height: 1.75rem;
+  border: 1px solid rgb(120, 120, 120);
+  border-radius: 20px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  outline: none;
+  background: rgb(250, 250, 250);
+
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.ListOfComments {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  margin-top: 0.5rem;
 }

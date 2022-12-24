@@ -15,7 +15,7 @@ function App() {
   const [search, setSearch] = useState("");
 
   // deleteAllPost();
-  printDatabase();
+  // printDatabase();
   // console.log(userData);
 
   return (

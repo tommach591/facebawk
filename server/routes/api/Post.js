@@ -58,19 +58,70 @@ router.get("/newsfeed/:user_id", (req, res) => {
     });
 });
 
+router.get("/getComments/:post_id", (req, res) => {
+  const { post_id } = req.params;
+
+  console.log(`Hit at http://localhost:3001/api/post/getComments/${post_id}`);
+
+  Post.find({ parent_id: post_id, type: "comment" })
+    .then((post) => {
+      return res.json(post);
+    })
+    .catch((err) => {
+      return res.status(404).json({ posts_not_found: "No posts" });
+    });
+});
+
 router.post("/post", (req, res) => {
   console.log("Hit at http://localhost:3001/api/post/post");
-  const { user_id, content } = req.body;
+  const { user_id, content, date_created } = req.body;
 
   const newPost = new Post({
     user_id: user_id,
     type: "post",
     content: content,
+    date_created: date_created,
+    attachment: "",
+    likes: [],
+  });
+
+  newPost.save().then((post) => {
+    return res.json(post);
+  });
+});
+
+router.post("/comment", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/comment");
+  const { user_id, parent_id, content, date_created } = req.body;
+
+  const newPost = new Post({
+    user_id: user_id,
+    parent_id: parent_id,
+    type: "comment",
+    content: content,
+    date_created: date_created,
+    attachment: "",
+    likes: [],
+  });
+
+  newPost.save().then((post) => {
+    return res.json(post);
+  });
+});
+
+router.post("/reply", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/reply");
+  const { user_id, parent_id, content } = req.body;
+
+  const newPost = new Post({
+    user_id: user_id,
+    parent_id: parent_id,
+    type: "reply",
+    content: content,
     date_created: new Date(Date.now()),
     attachment: "",
     replies: [],
     likes: [],
-    shares: [],
   });
 
   newPost.save().then((post) => {
@@ -104,46 +155,6 @@ router.post("/unlike", (req, res) => {
   )
     .exec()
     .then((result) => res.json(result));
-});
-
-router.post("/comment", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/post/comment");
-  const { user_id, parent_id, content } = req.body;
-
-  const newPost = new Post({
-    user_id: user_id,
-    parent_id: parent_id,
-    type: "comment",
-    content: content,
-    date_created: new Date(Date.now()),
-    attachment: "",
-    replies: [],
-    likes: [],
-  });
-
-  newPost.save().then((post) => {
-    return res.json(post);
-  });
-});
-
-router.post("/reply", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/post/reply");
-  const { user_id, parent_id, content } = req.body;
-
-  const newPost = new Post({
-    user_id: user_id,
-    parent_id: parent_id,
-    type: "reply",
-    content: content,
-    date_created: new Date(Date.now()),
-    attachment: "",
-    replies: [],
-    likes: [],
-  });
-
-  newPost.save().then((post) => {
-    return res.json(post);
-  });
 });
 
 router.delete("/delete", (req, res) => {

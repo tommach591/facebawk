@@ -36,6 +36,15 @@ export function getNewsFeed(user_id, friends) {
     .catch((err) => console.error(err));
 }
 
+export function getPostComments(post_id) {
+  return fetch(`${serverURL}/api/post/getComments/${post_id}`)
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
 export function createNewPost(user_id, content) {
   let body = {
     user_id: user_id,
@@ -44,6 +53,29 @@ export function createNewPost(user_id, content) {
   };
 
   return fetch(`${serverURL}/api/post/post`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function createNewComment(post_id, user_id, content) {
+  let body = {
+    parent_id: post_id,
+    user_id: user_id,
+    content: content,
+    date_created: new Date(Date.now()),
+  };
+
+  return fetch(`${serverURL}/api/post/comment`, {
     method: "POST",
     headers: {
       Accept: "application/json",

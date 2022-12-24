@@ -1,0 +1,105 @@
+.Comment {
+  width: fit-content;
+  max-width: 95%;
+  display: flex;
+  justify-content: left;
+
+  margin: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+
+  position: relative;
+
+  border: 1px solid rgb(50, 50, 50);
+  background: rgb(255, 250, 230);
+  border-radius: 20px;
+}
+
+.Comment > img {
+  width: 2rem;
+  height: 2rem;
+  background: white;
+  border-radius: 50%;
+}
+
+.Comment > img:hover {
+  cursor: pointer;
+}
+
+.CommentContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-top: 0.2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.CommentContent > h1 {
+  width: 100%;
+  margin-bottom: 0.5rem;
+
+  color: rgb(50, 50, 50);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.CommentContent > h1:hover {
+  cursor: pointer;
+}
+
+.CommentContent > h2 {
+  width: 100%;
+
+  color: rgb(50, 50, 50);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.CommentInteractions {
+  display: flex;
+
+  position: absolute;
+  top: 3.5rem;
+  left: 1rem;
+}
+
+.CommentInteractions > * {
+  margin: 0.2rem;
+  color: rgb(50, 50, 50);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+.CommentInteractions > *:hover {
+  cursor: pointer;
+}
+
+.CommentLikes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  right: -0.75rem;
+  bottom: -0.25rem;
+
+  padding: 0.1rem;
+
+  background: rgb(255, 250, 230);
+  border: 1px solid rgb(50, 50, 50);
+  border-radius: 20px;
+}
+
+.CommentLikes > img {
+  width: 0.8rem;
+}
+
+.CommentLikes > h2 {
+  margin-left: 0.1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
