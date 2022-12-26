@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { nFormatter } from "../../utils/helper";
 import {
-  createNewComment,
-  getPostComments,
+  createNewChild,
+  deletePost,
+  getPostChildren,
   likePost,
   unlikePost,
 } from "../../utils/Post";
 import { getProfile } from "../../utils/Profile";
-import { useUser, useUserData } from "../../utils/UserContext";
+import { useRefresh, useUser, useUserData } from "../../utils/UserContext";
 import "./Post.css";
 import Comment from "../Comment";
 
@@ -16,6 +17,7 @@ function Post({ post }) {
   const navigate = useNavigate();
   const user = useUser();
   const userData = useUserData();
+  const refreshUserData = useRefresh();
   const [owner, setOwner] = useState({});
   const datePosted = new Date(post.date_created);
   const [likes, setLikes] = useState([...post.likes]);
@@ -23,11 +25,15 @@ function Post({ post }) {
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState("");
 
+  const handleDeletePost = () => {
+    deletePost(post._id).then(() => refreshUserData());
+  };
+
   useEffect(() => {
     getProfile(post.user_id).then((res) => {
       res ? setOwner(res) : setOwner({});
     });
-    getPostComments(post._id).then((res) => {
+    getPostChildren(post._id).then((res) => {
       if (res) {
         res.sort((a, b) => {
           const a_date = new Date(a.date_created);
@@ -41,6 +47,16 @@ function Post({ post }) {
 
   return Object.keys(owner).length > 0 ? (
     <div className="Post">
+      {user === post.user_id ? (
+        <div className="DeletePost" onClick={() => handleDeletePost()}>
+          <img
+            src={"https://api.iconify.design/ep:close-bold.svg?color=%23323232"}
+            alt="X"
+          />
+        </div>
+      ) : (
+        <div />
+      )}
       <div className="Author">
         <img
           src={
@@ -119,7 +135,7 @@ function Post({ post }) {
             onSubmit={(event) => {
               event.preventDefault();
               if (newComment !== "") {
-                createNewComment(post._id, user, newComment).then((res) => {
+                createNewChild(post._id, user, newComment).then((res) => {
                   setComments([res, ...comments]);
                 });
                 setNewComment("");

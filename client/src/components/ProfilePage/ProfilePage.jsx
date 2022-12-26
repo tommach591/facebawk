@@ -1,16 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { getPostByUser } from "../../utils/Post";
-import { getProfile, makeFriendRequest } from "../../utils/Profile";
+import { getFriends, getProfile, makeFriendRequest } from "../../utils/Profile";
 import CreatePost from "../CreatePost";
 import EditDetails from "../EditDetails";
 import Post from "../Post";
 import "./ProfilePage.css";
-import { useUser, useUserData } from "../../utils/UserContext";
+import { useUser } from "../../utils/UserContext";
 
 function ProfilePage() {
   const user = useUser();
-  const userData = useUserData();
 
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
@@ -22,6 +21,7 @@ function ProfilePage() {
   const [postModalOn, setPostModalOn] = useState(false);
   const [editDetailsModalOn, setEditDetailsModalOn] = useState(false);
   const [reload, setReload] = useState(false);
+  const [friends, setFriends] = useState([]);
 
   const loadUserPosts = useCallback(() => {
     if (Object.keys(profileData).length !== 0) {
@@ -56,13 +56,15 @@ function ProfilePage() {
 
   useEffect(() => {
     loadUserPosts();
+    getFriends(profileData.user_id).then((res) => {
+      res ? setFriends(res) : setFriends([]);
+    });
   }, [profileData, loadUserPosts]);
 
   return Object.keys(profileData).length !== 0 ? (
     <div className="ProfilePage">
       {isOwner ? (
         <CreatePost
-          userData={userData}
           modalOn={postModalOn}
           setModalOn={setPostModalOn}
           appendNewPost={appendNewPost}
@@ -142,90 +144,128 @@ function ProfilePage() {
         )}
       </div>
       <div className="ProfileContent">
-        <div className="AboutMe">
-          <h1>Intro</h1>
-          <div className="Bio">
-            {profileData.bio !== "" ? <h2>{profileData.bio}</h2> : <div />}
+        <div className="ProfileLeft">
+          <div className="AboutMe">
+            <h1>Intro</h1>
+            <div className="Line" style={{ width: "100%" }} />
+            {profileData.bio !== "" ? (
+              <div className="Bio">
+                <h2>{profileData.bio}</h2>
+                <div className="Line" style={{ width: "100%" }} />
+              </div>
+            ) : (
+              <div />
+            )}
+
+            <div className="DetailsContainer">
+              {profileData.work !== "" ? (
+                <h2 className="Detail">
+                  <img
+                    src={
+                      "https://api.iconify.design/material-symbols:work.svg?color=%235c5c5c"
+                    }
+                    alt={""}
+                  />
+                  {profileData.work}
+                </h2>
+              ) : (
+                <div />
+              )}
+              {profileData.education !== "" ? (
+                <h2 className="Detail">
+                  <img
+                    src={
+                      "https://api.iconify.design/fa6-solid:graduation-cap.svg?color=%235c5c5c"
+                    }
+                    alt={""}
+                  />
+                  {profileData.education}
+                </h2>
+              ) : (
+                <div />
+              )}
+              {profileData.city !== "" ? (
+                <h2 className="Detail">
+                  <img
+                    src={
+                      "https://api.iconify.design/majesticons:location-marker.svg?color=%235c5c5c"
+                    }
+                    alt={""}
+                  />
+                  {profileData.city}
+                </h2>
+              ) : (
+                <div />
+              )}
+              {profileData.hometown !== "" ? (
+                <h2 className="Detail">
+                  <img
+                    src={
+                      "https://api.iconify.design/ic:round-home.svg?color=%235c5c5c"
+                    }
+                    alt={""}
+                  />
+                  {profileData.hometown}
+                </h2>
+              ) : (
+                <div />
+              )}
+              {profileData.relationship !== "" ? (
+                <h2 className="Detail">
+                  <img
+                    src={
+                      "https://api.iconify.design/ph:heart-fill.svg?color=%235c5c5c"
+                    }
+                    alt={""}
+                  />
+                  {profileData.relationship}
+                </h2>
+              ) : (
+                <div />
+              )}
+            </div>
+            <div className="EditDetailsButtonContainer">
+              {isOwner ? (
+                <button
+                  onClick={() => {
+                    setEditDetailsModalOn(true);
+                  }}
+                >
+                  Edit Details
+                </button>
+              ) : (
+                <div />
+              )}
+            </div>
           </div>
-          <div className="DetailsContainer">
-            {profileData.work !== "" ? (
-              <h2 className="Detail">
-                <img
-                  src={
-                    "https://api.iconify.design/material-symbols:work.svg?color=%235c5c5c"
-                  }
-                  alt={""}
-                />
-                {profileData.work}
-              </h2>
-            ) : (
-              <div />
-            )}
-            {profileData.education !== "" ? (
-              <h2 className="Detail">
-                <img
-                  src={
-                    "https://api.iconify.design/fa6-solid:graduation-cap.svg?color=%235c5c5c"
-                  }
-                  alt={""}
-                />
-                {profileData.education}
-              </h2>
-            ) : (
-              <div />
-            )}
-            {profileData.city !== "" ? (
-              <h2 className="Detail">
-                <img
-                  src={
-                    "https://api.iconify.design/majesticons:location-marker.svg?color=%235c5c5c"
-                  }
-                  alt={""}
-                />
-                {profileData.city}
-              </h2>
-            ) : (
-              <div />
-            )}
-            {profileData.hometown !== "" ? (
-              <h2 className="Detail">
-                <img
-                  src={
-                    "https://api.iconify.design/ic:round-home.svg?color=%235c5c5c"
-                  }
-                  alt={""}
-                />
-                {profileData.hometown}
-              </h2>
-            ) : (
-              <div />
-            )}
-            {profileData.relationship !== "" ? (
-              <h2 className="Detail">
-                <img
-                  src={
-                    "https://api.iconify.design/ph:heart-fill.svg?color=%235c5c5c"
-                  }
-                  alt={""}
-                />
-                {profileData.relationship}
-              </h2>
-            ) : (
-              <div />
-            )}
-          </div>
-          <div className="EditDetailsButtonContainer">
-            {isOwner ? (
-              <button
-                onClick={() => {
-                  setEditDetailsModalOn(true);
-                }}
-              >
-                Edit Details
-              </button>
-            ) : (
-              <div />
-            )}
+          <div className="ProfileFriends">
+            <h1>{`Friends (${friends.length})`}</h1>
+            <div className="Line" style={{ width: "100%" }} />
+            <div className="FriendList">
+              <div className="FriendGrid">
+                {friends.map((friend) => {
+                  return (
+                    <div
+                      key={friend.user_id}
+                      className="Friend"
+                      onClick={() => {
+                        navigate(`/profile/?user=${friend.user_id}`);
+                      }}
+                    >
+                      <img
+                        src={
+                          friend.pfp
+                            ? friend.pfp
+                            : "https://api.iconify.design/bi:person-circle.svg?color=%23888888"
+                        }
+                        alt="PFP"
+                      />
+                      <h2>{`${friend.first} ${friend.last}`}</h2>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
         <div className="Interactions">

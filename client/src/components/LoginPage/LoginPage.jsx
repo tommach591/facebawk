@@ -1,52 +1,49 @@
 import "./LoginPage.css";
 import Logo from "../../assets/logo.png";
 import { useState } from "react";
-import {
-  loginAccount,
-  deleteAccount,
-  getAllAccount,
-} from "../../utils/Account";
-import { deleteProfile, getAllProfile } from "../../utils/Profile";
+import { loginAccount, deleteAccount } from "../../utils/Account";
+import { deleteProfile } from "../../utils/Profile";
 import SignUpForm from "../SignUpForm";
 import { useUserUpdate } from "../../utils/UserContext";
+import { deletePostsByUser } from "../../utils/Post";
 
 function LoginPage() {
   const changeUser = useUserUpdate();
   const [modalOn, setModalOn] = useState(false);
 
-  const [loginEmail, setLoginEmail] = useState("");
+  const [loginLogin, setLoginLogin] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const handleLogin = () => {
-    loginAccount(loginEmail).then((res) => {
+    loginAccount(loginLogin).then((res) => {
       if (res && res.password === loginPassword) {
         changeUser(res._id);
       } else {
-        alert("Invalid email and password.");
+        alert("Invalid login and password.");
       }
     });
   };
 
   const handleDeleteAccount = () => {
-    deleteAccount(loginEmail, loginPassword).then((res) => {
-      if (res.success === true) {
-        deleteProfile(loginEmail).then((res) => {
-          alert("Account has been deleted.");
-          setLoginEmail("");
-          setLoginPassword("");
-        });
-      } else alert("Account does not exist or invalid password.");
-    });
+    if (loginLogin !== "facebawk")
+      deleteAccount(loginLogin, loginPassword).then((res) => {
+        if (res._id) {
+          deleteProfile(res._id).then((res) => {
+            if (res)
+              deletePostsByUser(res.user_id).then(() => {
+                alert("Account has been deleted.");
+                setLoginLogin("");
+                setLoginPassword("");
+              });
+          });
+        } else alert("Account does not exist or invalid password.");
+      });
+    else alert("Cannot delete guest account.");
   };
 
-  const handleGetAllAccount = () => {
-    getAllAccount().then((res) => {
-      console.log(res);
-      getAllProfile().then((res) => {
-        console.log(res);
-        alert("Printed all accounts and profiles to console.");
-      });
-    });
+  const handleGuestAccount = () => {
+    setLoginLogin("facebawk");
+    setLoginPassword("password");
   };
 
   const getWeb = () => {
@@ -60,11 +57,11 @@ function LoginPage() {
           <div className="SignInForm">
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Login"
               onChange={(event) => {
-                setLoginEmail(event.currentTarget.value);
+                setLoginLogin(event.currentTarget.value);
               }}
-              value={loginEmail}
+              value={loginLogin}
             />
             <input
               type="text"
@@ -86,7 +83,7 @@ function LoginPage() {
               <button
                 className="LoginScreenButton Guest"
                 onClick={() => {
-                  handleGetAllAccount();
+                  handleGuestAccount();
                 }}
               >
                 Use Guest Account

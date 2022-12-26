@@ -1,7 +1,12 @@
 import "./SearchPage.css";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getSearch, makeFriendRequest } from "../../utils/Profile";
+import {
+  getAllProfile,
+  getSearch,
+  makeFriendRequest,
+  removeFriend,
+} from "../../utils/Profile";
 import { useUser } from "../../utils/UserContext";
 
 function SearchPage() {
@@ -13,11 +18,26 @@ function SearchPage() {
   const [found, setFound] = useState([]);
   const [reload, setReload] = useState(false);
 
-  useEffect(() => {
-    getSearch(query).then((res) => {
-      res ? setFound(res) : setFound([]);
-      setReload(false);
+  let handleUnfriend = (friend) => {
+    removeFriend(user, friend).then((res) => {
+      removeFriend(friend, user).then((res) => {
+        setReload(true);
+      });
     });
+  };
+
+  useEffect(() => {
+    if (query !== "") {
+      getSearch(query).then((res) => {
+        res ? setFound(res) : setFound([]);
+        setReload(false);
+      });
+    } else {
+      getAllProfile().then((res) => {
+        res ? setFound(res) : setFound([]);
+        setReload(false);
+      });
+    }
   }, [query, reload]);
 
   return (
@@ -82,6 +102,22 @@ function SearchPage() {
                           ? "https://api.iconify.design/mdi:account-check.svg?color=%23ffffff"
                           : "https://api.iconify.design/ic:baseline-person-add-alt-1.svg?color=%23ffffff"
                       }
+                      alt=""
+                    />
+                  </button>
+                ) : (
+                  <div />
+                )}
+                {profileData.friends.includes(user) ? (
+                  <button
+                    className="Unfriend"
+                    onClick={() => {
+                      handleUnfriend(profileData.user_id);
+                    }}
+                  >
+                    <h2>Unfriend</h2>
+                    <img
+                      src="https://api.iconify.design/ic:baseline-person-remove.svg?color=%23FFFFFF"
                       alt=""
                     />
                   </button>

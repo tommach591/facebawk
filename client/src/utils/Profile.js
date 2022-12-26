@@ -27,10 +27,19 @@ export function getSearch(query) {
     .catch((err) => console.error(err));
 }
 
-export function createProfile(user_id, email, first, last, birthdate, gender) {
+export function getFriends(user_id) {
+  return fetch(`${serverURL}/api/profile/getFriends/${user_id}`)
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function createProfile(user_id, login, first, last, birthdate, gender) {
   let body = {
     user_id: user_id,
-    email: email,
+    login: login,
     first: first,
     last: last,
     birthdate: birthdate,
@@ -254,9 +263,9 @@ export function addPhoto(user_id, photo) {
     .catch((err) => console.error(err));
 }
 
-export function deleteProfile(loginEmail) {
+export function deleteProfile(user_id) {
   let body = {
-    email: loginEmail,
+    user_id: user_id,
   };
 
   return fetch(`${serverURL}/api/profile/delete`, {

@@ -138,8 +138,15 @@
   justify-content: center;
 }
 
-.AboutMe {
+.ProfileLeft {
   width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.AboutMe {
+  width: 85%;
   height: fit-content;
 
   background: rgb(255, 250, 200);
@@ -154,10 +161,12 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .Bio {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -234,4 +243,70 @@
 .Detail > img {
   width: 1.75rem;
   margin-right: 1rem;
+}
+
+.ProfileFriends {
+  width: 85%;
+  height: fit-content;
+
+  background: rgb(255, 250, 200);
+  border: 1px solid rgb(120, 120, 120);
+  border-radius: 10px;
+
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+.ProfileFriends > h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.FriendList {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.FriendGrid {
+  width: 100%;
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.Friend {
+  position: relative;
+  width: 7rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid rgb(50, 50, 50);
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+.Friend:hover {
+  cursor: pointer;
+}
+
+.Friend > img {
+  width: 100%;
+  background: white;
+}
+
+.Friend > h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+
+  bottom: 0px;
+  right: 2px;
+  text-align: right;
 }

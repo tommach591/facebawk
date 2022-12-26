@@ -41,13 +41,26 @@ router.get("/search/:query", (req, res) => {
     });
 });
 
+router.get("/getFriends/:user_id", (req, res) => {
+  const { user_id } = req.params;
+
+  console.log(`Hit at http://localhost:3001/api/profile/getFriends/${user_id}`);
+  Profile.find({ friends: user_id })
+    .then((prof) => {
+      return res.json(prof);
+    })
+    .catch((err) => {
+      return res.status(404).json({ profile_not_found: "No profiles" });
+    });
+});
+
 router.post("/signup", (req, res) => {
   console.log("Hit at http://localhost:3001/api/profile/signup");
-  const { user_id, email, first, last, birthdate, gender } = req.body;
+  const { user_id, login, first, last, birthdate, gender } = req.body;
 
   const newProfile = new Profile({
     user_id: user_id,
-    email: email,
+    login: login,
     first: first,
     last: last,
     birthdate: birthdate,
@@ -111,9 +124,12 @@ router.post("/update/remove_friend", (req, res) => {
 
   Profile.findOneAndUpdate(
     { user_id: user_id },
-    { $pull: { friend: new_friend } }
-  ).exec();
-  return res.json({ success: true });
+    { $pull: { friends: new_friend } }
+  )
+    .exec()
+    .then((result) => {
+      return res.json(result);
+    });
 });
 
 router.post("/update/add_friend_request", (req, res) => {
@@ -171,10 +187,27 @@ router.post("/update/add_photo", (req, res) => {
 
 router.delete("/delete", (req, res) => {
   console.log("Hit at http://localhost:3001/api/profile/delete");
-  const { email } = req.body;
+  const { user_id } = req.body;
 
-  Profile.findOneAndRemove({ email: email }).exec();
-  return res.json({ success: true });
+  Profile.updateMany(
+    {
+      friends: user_id,
+    },
+    { $pull: { friends: user_id } }
+  ).exec();
+
+  Profile.updateMany(
+    {
+      friend_requests: user_id,
+    },
+    { $pull: { friend_requests: user_id } }
+  ).exec();
+
+  Profile.findOneAndRemove({ user_id: user_id })
+    .exec()
+    .then((result) => {
+      return res.json(result);
+    });
 });
 
 module.exports = router;

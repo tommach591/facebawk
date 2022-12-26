@@ -123,3 +123,33 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24px;
 }
+
+.Unfriend {
+  width: 10rem;
+  height: 2.25rem;
+
+  margin: 0.5rem;
+
+  background: rgb(255, 67, 67);
+  border: 0px;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  right: 12rem;
+}
+
+.Unfriend > h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  margin: 0.25rem;
+}
+
+.Unfriend > img {
+  width: 1.25rem;
+}

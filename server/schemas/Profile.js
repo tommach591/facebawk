@@ -6,7 +6,7 @@ const ProfileSchema = new Schema({
     type: String,
     required: true,
   },
-  email: {
+  login: {
     type: String,
     required: true,
   },

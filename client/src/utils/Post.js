@@ -36,8 +36,8 @@ export function getNewsFeed(user_id, friends) {
     .catch((err) => console.error(err));
 }
 
-export function getPostComments(post_id) {
-  return fetch(`${serverURL}/api/post/getComments/${post_id}`)
+export function getPostChildren(post_id) {
+  return fetch(`${serverURL}/api/post/getChildren/${post_id}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -67,15 +67,15 @@ export function createNewPost(user_id, content) {
     .catch((err) => console.error(err));
 }
 
-export function createNewComment(post_id, user_id, content) {
+export function createNewChild(parent_id, user_id, content) {
   let body = {
-    parent_id: post_id,
+    parent_id: parent_id,
     user_id: user_id,
     content: content,
     date_created: new Date(Date.now()),
   };
 
-  return fetch(`${serverURL}/api/post/comment`, {
+  return fetch(`${serverURL}/api/post/child`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -105,7 +105,6 @@ export function likePost(post_id, user_id) {
     body: JSON.stringify(body),
   })
     .then((res) => {
-      console.log(res);
       if (res.ok) return res.json();
       else return;
     })
@@ -120,6 +119,46 @@ export function unlikePost(post_id, user_id) {
 
   return fetch(`${serverURL}/api/post/unlike`, {
     method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function deletePost(post_id) {
+  let body = {
+    post_id: post_id,
+  };
+
+  return fetch(`${serverURL}/api/post/delete`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function deletePostsByUser(user_id) {
+  let body = {
+    user_id: user_id,
+  };
+
+  return fetch(`${serverURL}/api/post/deleteByUser`, {
+    method: "DELETE",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

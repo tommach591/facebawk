@@ -7,7 +7,7 @@ import { createProfile } from "../../utils/Profile";
 function SignUpForm({ modalOn, setModalOn }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const today = new Date(Date.now());
   const [month, setMonth] = useState(today.getMonth().toString());
@@ -18,7 +18,7 @@ function SignUpForm({ modalOn, setModalOn }) {
   const resetForm = () => {
     setFirstName("");
     setLastName("");
-    setEmail("");
+    setLogin("");
     setPassword("");
     setMonth(today.getMonth().toString());
     setDay(today.getDate().toString());
@@ -31,18 +31,18 @@ function SignUpForm({ modalOn, setModalOn }) {
     if (
       firstName === "" ||
       lastName === "" ||
-      email === "" ||
+      login === "" ||
       password === ""
     ) {
       alert("Fill out the form.");
       return;
     }
 
-    createAccount(email, password).then((res) => {
-      if (res.success === false) alert("Email in use.");
+    createAccount(login, password).then((res) => {
+      if (res.success === false) alert("Login in use.");
       else {
         let date = new Date(year, month, day);
-        createProfile(res._id, email, firstName, lastName, date, gender).then(
+        createProfile(res._id, login, firstName, lastName, date, gender).then(
           (res) => {
             alert("Account created successfully.");
             resetForm();
@@ -85,10 +85,10 @@ function SignUpForm({ modalOn, setModalOn }) {
           <div className="SignUpCredentials">
             <input
               type="text"
-              placeholder="Email"
-              value={email}
+              placeholder="Login"
+              value={login}
               onChange={(event) => {
-                setEmail(event.currentTarget.value);
+                setLogin(event.currentTarget.value);
               }}
             />
             <input

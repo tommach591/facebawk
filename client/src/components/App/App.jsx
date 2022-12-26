@@ -9,13 +9,14 @@ import Header from "../Header";
 import SearchPage from "../SearchPage/";
 import FriendRequestPage from "../FriendRequestPage/";
 import { useUserData } from "../../utils/UserContext";
+import { deleteProfile } from "../../utils/Profile";
 
 function App() {
   const userData = useUserData();
   const [search, setSearch] = useState("");
 
   // deleteAllPost();
-  // printDatabase();
+  printDatabase();
   // console.log(userData);
 
   return (

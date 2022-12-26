@@ -9,8 +9,8 @@ export function getAllAccount() {
     .catch((err) => console.error(err));
 }
 
-export function loginAccount(loginEmail) {
-  return fetch(`${serverURL}/api/account/login/${loginEmail}`)
+export function loginAccount(loginLogin) {
+  return fetch(`${serverURL}/api/account/login/${loginLogin}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -18,9 +18,9 @@ export function loginAccount(loginEmail) {
     .catch((err) => console.error(err));
 }
 
-export function createAccount(email, password) {
+export function createAccount(login, password) {
   let body = {
-    email: email,
+    login: login,
     password: password,
   };
 
@@ -39,9 +39,9 @@ export function createAccount(email, password) {
     .catch((err) => console.error(err));
 }
 
-export function deleteAccount(loginEmail, loginPassword) {
+export function deleteAccount(loginLogin, loginPassword) {
   let body = {
-    email: loginEmail,
+    login: loginLogin,
     password: loginPassword,
   };
 

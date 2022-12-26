@@ -1,14 +1,14 @@
-.Comment {
+.Reply {
   margin: 0.25rem;
 }
 
-.CommentBubble {
+.ReplyBubble {
   width: fit-content;
   max-width: 95%;
   display: flex;
   justify-content: left;
 
-  padding: 0.5rem;
+  padding: 0.4rem;
 
   border: 1px solid rgb(50, 50, 50);
   background: rgb(255, 250, 230);
@@ -17,9 +17,9 @@
   position: relative;
 }
 
-.DeleteComment {
-  width: 0.75rem;
-  height: 0.75rem;
+.DeleteReply {
+  width: 0.65rem;
+  height: 0.65rem;
 
   display: flex;
   justify-content: center;
@@ -30,31 +30,31 @@
   border-radius: 50%;
 
   position: absolute;
-  right: -0.2rem;
-  top: -0.2rem;
+  right: -0.1rem;
+  top: -0.1rem;
 }
 
-.DeleteComment:hover {
+.DeleteReply:hover {
   cursor: pointer;
 }
 
-.DeleteComment > img {
+.DeleteReply > img {
   width: 100%;
   height: 100%;
 }
 
-.CommentBubble > img {
-  width: 2rem;
-  height: 2rem;
+.ReplyBubble > img {
+  width: 1.75rem;
+  height: 1.75rem;
   background: white;
   border-radius: 50%;
 }
 
-.CommentBubble > img:hover {
+.ReplyBubble > img:hover {
   cursor: pointer;
 }
 
-.CommentContent {
+.ReplyContent {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -67,48 +67,48 @@
   margin-right: 0.5rem;
 }
 
-.CommentContent > h1 {
+.ReplyContent > h1 {
   width: 100%;
-  min-width: 5rem;
-  margin-bottom: 0.4rem;
+  min-width: 2rem;
+  margin-bottom: 0.35rem;
+
+  color: rgb(50, 50, 50);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.ReplyContent > h1:hover {
+  cursor: pointer;
+}
+
+.ReplyContent > h2 {
+  width: 100%;
 
   color: rgb(50, 50, 50);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
-  font-weight: bold;
 }
 
-.CommentContent > h1:hover {
-  cursor: pointer;
-}
-
-.CommentContent > h2 {
-  width: 100%;
-
-  color: rgb(50, 50, 50);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-.CommentInteractions {
+.ReplyInteractions {
   display: flex;
 
   position: relative;
   left: 1rem;
 }
 
-.CommentInteractions > * {
+.ReplyInteractions > * {
   margin: 0.2rem;
   color: rgb(50, 50, 50);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
 
-.CommentInteractions > *:hover {
+.ReplyInteractions > *:hover {
   cursor: pointer;
 }
 
-.CommentLikes {
+.ReplyLikes {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,68 +124,14 @@
   border-radius: 20px;
 }
 
-.CommentLikes > img {
+.ReplyLikes > img {
   width: 0.8rem;
   margin-left: 0.15rem;
 }
 
-.CommentLikes > h2 {
+.ReplyLikes > h2 {
   margin-left: 0.1rem;
   margin-right: 0.15rem;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
-}
-
-.PostReplies {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.CommentReplies {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 2rem;
-}
-
-.WriteAReply {
-  width: 98%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  margin-bottom: 0.5rem;
-}
-
-.WriteAReply > img {
-  width: 2rem;
-  background: white;
-  border-radius: 50%;
-}
-
-.WriteAReply > input {
-  width: 82%;
-  height: 1.75rem;
-  border: 1px solid rgb(120, 120, 120);
-  border-radius: 20px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  outline: none;
-  background: rgb(250, 250, 250);
-
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.ListOfReplies {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: left;
-  margin-top: 0.5rem;
 }

@@ -14,32 +14,32 @@ router.get("/allAccounts", (req, res) => {
     });
 });
 
-router.get("/login/:email", (req, res) => {
-  const { email } = req.params;
+router.get("/login/:login", (req, res) => {
+  const { login } = req.params;
 
-  console.log(`Hit at http://localhost:3001/api/account/login/${email}`);
-  Account.findOne({ email: email })
+  console.log(`Hit at http://localhost:3001/api/account/login/${login}`);
+  Account.findOne({ login: login })
     .then((acc) => {
       return res.json(acc);
     })
     .catch((err) => {
       return res
         .status(404)
-        .json({ account_not_found: "No account found with that email" });
+        .json({ account_not_found: "No account found with that login" });
     });
 });
 
 router.post("/signup", (req, res) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
 
   console.log("Hit at http://localhost:3001/api/account/signup");
 
   const newAccount = new Account({
-    email: email,
+    login: login,
     password: password,
   });
 
-  Account.exists({ email: email }, (err, doc) => {
+  Account.exists({ login: login }, (err, doc) => {
     if (doc) {
       return res.json({ success: false });
     } else {
@@ -51,14 +51,17 @@ router.post("/signup", (req, res) => {
 });
 
 router.delete("/delete", (req, res) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
 
   console.log("Hit at http://localhost:3001/api/account/delete");
 
-  Account.exists({ email: email, password: password }, (err, doc) => {
+  Account.exists({ login: login, password: password }, (err, doc) => {
     if (doc) {
-      Account.findOneAndRemove({ email: email, password: password }).exec();
-      return res.json({ success: true });
+      Account.findOneAndRemove({ login: login, password: password })
+        .exec()
+        .then((result) => {
+          return res.json(result);
+        });
     } else {
       return res.json({ success: false });
     }

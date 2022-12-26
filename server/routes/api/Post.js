@@ -58,12 +58,12 @@ router.get("/newsfeed/:user_id", (req, res) => {
     });
 });
 
-router.get("/getComments/:post_id", (req, res) => {
+router.get("/getChildren/:post_id", (req, res) => {
   const { post_id } = req.params;
 
-  console.log(`Hit at http://localhost:3001/api/post/getComments/${post_id}`);
+  console.log(`Hit at http://localhost:3001/api/post/getChildren/${post_id}`);
 
-  Post.find({ parent_id: post_id, type: "comment" })
+  Post.find({ parent_id: post_id })
     .then((post) => {
       return res.json(post);
     })
@@ -90,14 +90,14 @@ router.post("/post", (req, res) => {
   });
 });
 
-router.post("/comment", (req, res) => {
-  console.log("Hit at http://localhost:3001/api/post/comment");
+router.post("/child", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/child");
   const { user_id, parent_id, content, date_created } = req.body;
 
   const newPost = new Post({
     user_id: user_id,
     parent_id: parent_id,
-    type: "comment",
+    type: "child",
     content: content,
     date_created: date_created,
     attachment: "",
@@ -159,9 +159,34 @@ router.post("/unlike", (req, res) => {
 
 router.delete("/delete", (req, res) => {
   console.log("Hit at http://localhost:3001/api/post/delete");
-  let post_id = req.body.post_id;
+  const { post_id } = req.body;
 
-  Profile.findOneAndRemove({ _id: post_id }).exec();
+  Post.findOneAndDelete({ _id: post_id }).exec();
+  Post.find({ parent_id: post_id }).then((result) => {
+    result.forEach((comment) => {
+      Post.deleteMany({ parent_id: comment._id }).exec();
+      Post.findOneAndDelete({ _id: comment._id }).exec();
+    });
+  });
+  return res.json({ success: true });
+});
+
+router.delete("/deleteByUser", (req, res) => {
+  console.log("Hit at http://localhost:3001/api/post/deleteByUser");
+  const { user_id } = req.body;
+
+  Post.find({ user_id: user_id }).then((allPosts) => {
+    allPosts.forEach((post) => {
+      Post.find({ user_id: user_id }).then((allComments) => {
+        allComments.forEach((comment) => {
+          Post.deleteMany({ parent_id: comment._id }).exec();
+          Post.findOneAndDelete({ _id: comment._id }).exec();
+        });
+      });
+      Post.findOneAndDelete({ _id: post._id }).exec();
+    });
+  });
+
   return res.json({ success: true });
 });
 
