@@ -32,10 +32,10 @@
 }
 
 .Description > img {
-  width: 25rem;
+  width: 30rem;
 
   position: relative;
-  left: -1.25rem;
+  left: -2.75rem;
   top: 0.25rem;
 
   margin-bottom: 1rem;
@@ -216,15 +216,15 @@
   }
 
   .Description {
-    left: 0rem;
-    top: -1rem;
+    left: 1rem;
+    top: 1rem;
   }
 
   .Description > img {
-    width: 20rem;
+    width: 25rem;
 
     position: relative;
-    left: -0.5rem;
+    left: -1rem;
     top: 0.25rem;
 
     margin-bottom: 1rem;
@@ -234,6 +234,9 @@
     font-size: 24px;
     width: 20rem;
     line-height: 24px;
+
+    left: 2.25rem;
+    top: -0.1rem;
   }
 
   .SignInForm {
