@@ -95,6 +95,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .LoginScreenButton {
@@ -207,4 +208,40 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: rgb(100, 100, 100);
+}
+
+@media (max-width: 768px) {
+  .SignIn {
+    flex-direction: column;
+  }
+
+  .Description {
+    left: 0rem;
+    top: -1rem;
+  }
+
+  .Description > img {
+    width: 20rem;
+
+    position: relative;
+    left: -0.5rem;
+    top: 0.25rem;
+
+    margin-bottom: 1rem;
+  }
+
+  .Description > h1 {
+    font-size: 24px;
+    width: 20rem;
+    line-height: 24px;
+  }
+
+  .SignInForm {
+    width: 22rem;
+    height: 22rem;
+
+    position: relative;
+    left: 0rem;
+    top: 2rem;
+  }
 }

@@ -86,3 +86,16 @@
   width: 1.25rem;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .FriendRequest {
+    height: 7rem;
+    width: 80%;
+    align-items: flex-start;
+  }
+
+  .FriendRequestButtonContainer {
+    top: 5rem;
+    right: 2.75rem;
+  }
+}

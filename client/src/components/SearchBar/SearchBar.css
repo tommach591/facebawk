@@ -42,3 +42,9 @@
   border: 1px solid rgb(230, 48, 48);
   box-shadow: 0px 0px 3px rgb(230, 48, 48);
 }
+
+@media (max-width: 768px) {
+  .SearchBar {
+    width: 61%;
+  }
+}

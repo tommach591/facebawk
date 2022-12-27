@@ -1,23 +1,16 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
-import { printDatabase } from "../../utils/helper";
-import { deleteAllPost } from "../../utils/Post";
 import Home from "../Home";
 import ProfilePage from "../ProfilePage/";
 import Header from "../Header";
 import SearchPage from "../SearchPage/";
 import FriendRequestPage from "../FriendRequestPage/";
 import { useUserData } from "../../utils/UserContext";
-import { deleteProfile } from "../../utils/Profile";
 
 function App() {
   const userData = useUserData();
   const [search, setSearch] = useState("");
-
-  // deleteAllPost();
-  printDatabase();
-  // console.log(userData);
 
   return (
     <div className="App">

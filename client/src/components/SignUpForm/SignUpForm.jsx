@@ -92,9 +92,9 @@ function SignUpForm({ modalOn, setModalOn }) {
               }}
             />
             <input
-              type="text"
+              type="password"
               placeholder="New password"
-              value={new Array(password.length + 1).join("*")}
+              value={password}
               onChange={(event) => {
                 setPassword(event.currentTarget.value);
               }}
@@ -190,12 +190,11 @@ function SignUpForm({ modalOn, setModalOn }) {
             </label>
           </div>
           <div className="SignUpTerms">
-            <h2>
-              This is fake. FaceBawk will not do anything with your information.
-            </h2>
+            <h2>You do not need an email to create an account.</h2>
             <h2>
               By clicking Sign Up, you agree to our nonexistent Terms, Privacy
-              Policy and Cookies Policy and acknowledge this is fake.
+              Policy and Cookies Policy and acknowledge this is just a for fun
+              project.
             </h2>
           </div>
           <div className="SignUpFormButtonContainer">

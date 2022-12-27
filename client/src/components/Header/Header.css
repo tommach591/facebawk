@@ -1,7 +1,7 @@
 .Header {
   position: fixed;
   background: rgb(255, 250, 200);
-  width: 100%;
+  width: 100vw;
   height: 4rem;
 
   border-bottom: 1px solid rgb(120, 120, 120);
@@ -23,6 +23,7 @@
 }
 
 .Profile {
+  position: relative;
   width: 2.5rem;
   height: 2.5rem;
 
@@ -33,11 +34,11 @@
   background: white;
   border-radius: 50%;
 
-  margin: 0.5rem;
+  margin: 1.5rem;
 }
 
 .Profile > img {
-  width: 3rem;
+  width: 100%;
 }
 
 .Profile:hover {
@@ -47,8 +48,8 @@
 .Dropdown {
   width: 15rem;
   position: absolute;
-  right: 0rem;
-  top: 3.5rem;
+  right: 3rem;
+  top: 4rem;
 
   border: 1px solid rgb(50, 50, 50);
   background: white;
@@ -106,6 +107,18 @@
 
 .AtProfile {
   position: absolute;
-  top: 2.1rem;
-  left: 2.25rem;
+  bottom: -0.25rem;
+  right: -0.25rem;
+}
+
+@media (max-width: 768px) {
+  .Update {
+    right: -1rem;
+    margin: 0rem;
+  }
+
+  .Dropdown {
+    right: 2rem;
+    top: 4rem;
+  }
 }

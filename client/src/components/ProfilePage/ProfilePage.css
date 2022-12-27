@@ -83,51 +83,15 @@
   top: 420px;
 }
 
-.AddFriend {
-  width: 10rem;
-  height: 2.25rem;
-
-  margin: 0.5rem;
-  margin-top: 2rem;
-
-  background: rgb(92, 92, 92);
-  border: 0px;
-  border-radius: 5px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.AddFriend > h2 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  margin: 0.25rem;
-}
-
-.AddFriend > img {
-  width: 1.25rem;
-}
-
-.AddFriend:hover {
-  cursor: pointer;
-  background: rgb(73, 73, 73);
-}
-
-.AddFriend:active {
-  cursor: pointer;
-  background: rgb(63, 63, 63);
-}
-
-.AddFriend:disabled {
-  cursor: default;
-}
-
 .AtProfilePage {
   position: absolute;
   left: 1450px;
+  top: 362px;
+}
+
+.AtPFP {
+  position: absolute;
+  left: 1265px;
   top: 362px;
 }
 
@@ -142,7 +106,6 @@
   width: 30%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .AboutMe {
@@ -155,13 +118,44 @@
 
   margin: 0.5rem;
   padding: 1rem;
+
+  position: relative;
 }
 
-.AboutMe > h1 {
+.Heading > h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 1rem;
+}
+
+.Heading > h1:hover {
+  cursor: pointer;
+}
+
+.Arrow {
+  border: solid black;
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  padding: 5px;
+}
+
+.Up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}
+
+.Down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+
+  position: absolute;
+  right: 1.5rem;
+  top: 1.05rem;
 }
 
 .Bio {
@@ -176,6 +170,8 @@
   margin: 1.25rem;
 
   text-align: center;
+  white-space: pre-line;
+  line-height: 18px;
 }
 
 .Interactions {
@@ -255,6 +251,8 @@
 
   margin: 0.5rem;
   padding: 1rem;
+
+  position: relative;
 }
 
 .ProfileFriends > h1 {
@@ -275,7 +273,7 @@
   width: 100%;
   margin: 1rem;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 7rem 7rem 7rem;
 }
 
 .Friend {
@@ -309,4 +307,71 @@
   bottom: 0px;
   right: 2px;
   text-align: right;
+}
+
+@media (max-width: 768px) {
+  .Display {
+    height: 34rem;
+  }
+
+  .BannerPicture {
+    width: 100%;
+  }
+
+  .ProfilePicture {
+    width: 8rem;
+    height: 8rem;
+    position: absolute;
+    left: 20px;
+    top: 320px;
+  }
+
+  .DisplayName {
+    width: 13rem;
+    font-size: 20px;
+
+    left: 160px;
+    top: 370px;
+  }
+
+  .DisplayFriendCount {
+    font-size: 16px;
+    position: absolute;
+    left: 160px;
+    top: 400px;
+  }
+
+  .AtProfilePage {
+    position: absolute;
+    left: 200px;
+    top: 475px;
+  }
+
+  .AtPFP {
+    position: absolute;
+    left: 20px;
+    top: 475px;
+  }
+
+  .ProfileContent {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ProfileLeft {
+    width: 84.25%;
+  }
+
+  .Interactions {
+    width: 100%;
+  }
+
+  .Friend {
+    width: 5.25rem;
+  }
+
+  .FriendGrid {
+    grid-template-columns: 5.25rem 5.25rem 5.25rem;
+  }
 }

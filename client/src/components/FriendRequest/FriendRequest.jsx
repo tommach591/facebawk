@@ -47,9 +47,7 @@ function FriendRequest({ id }) {
           className="FriendRequestButton Accept"
           onClick={() => {
             addFriend(user, id).then((res) => {
-              console.log(res);
               addFriend(id, user).then((res) => {
-                console.log(res);
                 refreshUserData();
               });
             });
@@ -65,7 +63,6 @@ function FriendRequest({ id }) {
           className="FriendRequestButton Decline"
           onClick={() => {
             declineFriendRequest(user, id).then((res) => {
-              console.log(res);
               refreshUserData();
             });
           }}

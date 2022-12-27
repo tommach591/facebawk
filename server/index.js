@@ -7,8 +7,8 @@ const Account = require("./routes/api/Account");
 const Profile = require("./routes/api/Profile");
 const Post = require("./routes/api/Post");
 
-const uri =
-  "mongodb+srv://booktoface:Booktoface12@booktofacecluster.tre7r7o.mongodb.net/?retryWrites=true&w=majority";
+const password = "Booktoface12";
+const uri = `mongodb+srv://booktoface:${password}@booktofacecluster.tre7r7o.mongodb.net/?retryWrites=true&w=majority`;
 
 async function connect() {
   try {

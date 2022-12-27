@@ -137,9 +137,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  position: absolute;
-  right: 12rem;
 }
 
 .Unfriend > h2 {
@@ -152,4 +149,45 @@
 
 .Unfriend > img {
   width: 1.25rem;
+}
+
+.Unfriend:hover {
+  cursor: pointer;
+  background: rgb(220, 55, 55);
+}
+
+.Unfriend:active {
+  cursor: pointer;
+  background: rgb(190, 50, 50);
+}
+
+.AtSearch {
+  position: absolute;
+  right: 12rem;
+}
+
+@media (max-width: 768px) {
+  .FoundUsers {
+    height: 7rem;
+    width: 80%;
+    align-items: flex-start;
+  }
+
+  .AddFriend {
+    width: 40%;
+  }
+
+  .Unfriend {
+    width: 40%;
+  }
+
+  .AtSearchPage {
+    top: 5rem;
+    right: 0.75rem;
+  }
+
+  .AtSearch {
+    top: 5rem;
+    right: 11rem;
+  }
 }

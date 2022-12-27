@@ -55,6 +55,7 @@
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
+
   border: 1px solid rgb(50, 50, 50);
   border-radius: 10px;
 }
@@ -83,4 +84,14 @@
 .CreatePostButton:active {
   cursor: pointer;
   background: rgb(63, 63, 63);
+}
+
+@media (max-width: 768px) {
+  .CreatePost {
+    width: 22rem;
+  }
+
+  .CreatePostButton {
+    width: 50%;
+  }
 }

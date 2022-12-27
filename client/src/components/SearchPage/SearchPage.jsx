@@ -110,7 +110,7 @@ function SearchPage() {
                 )}
                 {profileData.friends.includes(user) ? (
                   <button
-                    className="Unfriend"
+                    className="Unfriend AtSearch"
                     onClick={() => {
                       handleUnfriend(profileData.user_id);
                     }}

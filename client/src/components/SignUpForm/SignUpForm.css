@@ -193,3 +193,30 @@
   cursor: pointer;
   background: rgb(185, 156, 26);
 }
+
+@media (max-width: 768px) {
+  .SignUpForm {
+    width: 20rem;
+  }
+
+  .SignUpFormNames {
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+  }
+
+  .SignUpFormNames > input {
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+  }
+
+  .SignUpBirthday > select {
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .SignUpGender > label > input {
+    margin-left: 0.7rem;
+  }
+}

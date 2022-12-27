@@ -64,12 +64,12 @@ function LoginPage() {
               value={loginLogin}
             />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               onChange={(event) => {
                 setLoginPassword(event.currentTarget.value);
               }}
-              value={new Array(loginPassword.length + 1).join("*")}
+              value={loginPassword}
             />
             <div className="LoginScreenButtonContainer">
               <button
@@ -89,7 +89,7 @@ function LoginPage() {
                 Use Guest Account
               </button>
             </div>
-            <div className="ForgotPasswordButton">Forgot Password?</div>
+            {/* <div className="ForgotPasswordButton">Forgot Password?</div> */}
             <div className="Line" style={{ width: "90%" }} />
             <div className="LoginScreenButtonContainer">
               <button
