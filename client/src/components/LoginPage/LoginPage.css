@@ -207,6 +207,7 @@
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
+  line-height: 14px;
   color: rgb(100, 100, 100);
 }
 
@@ -246,5 +247,12 @@
     position: relative;
     left: 0rem;
     top: 2rem;
+  }
+
+  .Fineprint {
+    text-align: center;
+    width: 70%;
+    top: -4rem;
+    line-height: 18px;
   }
 }
