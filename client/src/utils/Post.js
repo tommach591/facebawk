@@ -1,4 +1,4 @@
-const serverURL = "http://localhost:3001";
+const serverURL = "https://facebawk.herokuapp.com";
 
 export function getAllPost() {
   return fetch(`${serverURL}/api/post/allPosts`)

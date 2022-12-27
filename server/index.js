@@ -1,21 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
 
 const Account = require("./routes/api/Account");
 const Profile = require("./routes/api/Profile");
 const Post = require("./routes/api/Post");
 
-const password = "Booktoface12";
-const uri = `mongodb+srv://booktoface:${password}@booktofacecluster.tre7r7o.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://booktoface:${process.env.MONGODB_PASSWORD}@booktofacecluster.tre7r7o.mongodb.net/?retryWrites=true&w=majority`;
 
 async function connect() {
   try {
     await mongoose.connect(uri);
     console.log("Connected to MongoDB");
   } catch (err) {
-    console.error(error);
+    console.error(err);
   }
 }
 
@@ -29,6 +30,6 @@ app.use("/api/account", Account);
 app.use("/api/profile", Profile);
 app.use("/api/post", Post);
 
-app.listen(3001, () => {
-  console.log("Server started on port 3001.");
+app.listen(process.env.PORT || 3001, () => {
+  console.log(`Server started.`);
 });
