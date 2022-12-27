@@ -13,6 +13,7 @@ function SearchPage() {
   const user = useUser();
 
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q");
   const [found, setFound] = useState([]);
