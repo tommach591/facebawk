@@ -28,8 +28,8 @@ function ProfilePage() {
   const [reload, setReload] = useState(false);
   const [friends, setFriends] = useState([]);
 
-  const [showIntro, setShowIntro] = useState(false);
-  const [showFriends, setShowFriends] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
+  const [showFriends, setShowFriends] = useState(true);
 
   const loadUserPosts = useCallback(() => {
     if (Object.keys(profileData).length !== 0) {

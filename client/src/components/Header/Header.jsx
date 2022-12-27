@@ -4,6 +4,8 @@ import SearchBar from "../SearchBar/";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserData, useUserUpdate } from "../../utils/UserContext";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 function Header({ search, setSearch }) {
   const userData = useUserData();
@@ -11,12 +13,25 @@ function Header({ search, setSearch }) {
 
   const navigate = useNavigate();
   const [dropdown, setDropdown] = useState(false);
+  const dropdownRef = useRef();
+
+  useEffect(() => {
+    function handleDropdownClick(event) {
+      if (!dropdownRef.current?.contains(event.target)) {
+        setDropdown(false);
+      }
+    }
+    window.addEventListener("mousedown", handleDropdownClick);
+    return () => {
+      window.removeEventListener("mousedown", handleDropdownClick);
+    };
+  }, [dropdown]);
 
   return (
     <div className="Header">
       <HomeButton />
       <SearchBar search={search} setSearch={setSearch} />
-      <div className="Update">
+      <div className="Update" ref={dropdownRef}>
         <div
           className="Profile"
           onClick={() => {
