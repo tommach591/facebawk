@@ -9,14 +9,20 @@
 .Content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   padding-top: 5rem;
 }
 
+.ListOfPosts {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .Cluck {
-  width: 42rem;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -69,7 +75,7 @@
 
 .EmptyNewsFeed {
   height: 3rem;
-  width: 42rem;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -88,12 +94,11 @@
 }
 
 @media (max-width: 768px) {
-  .Cluck {
+  .ListOfPosts {
     width: 80%;
   }
 
   .EmptyNewsFeed {
-    width: 80%;
     height: 4rem;
   }
 }

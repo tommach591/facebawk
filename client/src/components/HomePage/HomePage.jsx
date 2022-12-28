@@ -43,34 +43,36 @@ function HomePage() {
         appendNewPost={appendNewPost}
       />
       <div className="Content">
-        <div
-          className="Cluck"
-          onClick={() => {
-            setModalOn(true);
-          }}
-        >
-          <div className="MainCluck">
-            <img
-              src={
-                userData.pfp
-                  ? userData.pfp
-                  : "https://api.iconify.design/bi:person-circle.svg?color=%23888888"
-              }
-              alt="PFP"
-            />
-            <input type="text" placeholder="What's clucking?" disabled />
+        <div className="ListOfPosts">
+          <div
+            className="Cluck"
+            onClick={() => {
+              setModalOn(true);
+            }}
+          >
+            <div className="MainCluck">
+              <img
+                src={
+                  userData.pfp
+                    ? userData.pfp
+                    : "https://api.iconify.design/bi:person-circle.svg?color=%23888888"
+                }
+                alt="PFP"
+              />
+              <input type="text" placeholder="What's clucking?" disabled />
+            </div>
+            <div className="Line" style={{ width: "95%" }} />
           </div>
-          <div className="Line" style={{ width: "95%" }} />
+          {newsFeed.length > 0 ? (
+            newsFeed.map((post) => {
+              return <Post key={post._id} post={post} />;
+            })
+          ) : (
+            <h1 className="EmptyNewsFeed">
+              Looks like you're new! Find your friends or post something!
+            </h1>
+          )}
         </div>
-        {newsFeed.length > 0 ? (
-          newsFeed.map((post) => {
-            return <Post key={post._id} post={post} />;
-          })
-        ) : (
-          <h1 className="EmptyNewsFeed">
-            Looks like you're new! Find your friends or post something!
-          </h1>
-        )}
       </div>
     </div>
   ) : (

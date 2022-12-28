@@ -1,10 +1,12 @@
 import "./SignUpForm.css";
 import { useState } from "react";
 import Modal from "../Modal";
-import { createAccount } from "../../utils/Account";
+import { createAccount, loginAccount } from "../../utils/Account";
 import { createProfile } from "../../utils/Profile";
+import { useUserUpdate } from "../../utils/UserContext";
 
 function SignUpForm({ modalOn, setModalOn }) {
+  const changeUser = useUserUpdate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [login, setLogin] = useState("");
@@ -46,6 +48,13 @@ function SignUpForm({ modalOn, setModalOn }) {
           (res) => {
             alert("Account created successfully.");
             resetForm();
+            loginAccount(login).then((res) => {
+              if (res && res.password === password) {
+                changeUser(res._id);
+              } else {
+                alert("Invalid login and password.");
+              }
+            });
           }
         );
       }

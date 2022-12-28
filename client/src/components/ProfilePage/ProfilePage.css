@@ -96,14 +96,14 @@
 }
 
 .ProfileContent {
-  width: 75%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 .ProfileLeft {
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: column;
 }
@@ -175,8 +175,9 @@
 }
 
 .Interactions {
-  width: 50%;
-
+  width: 35.5%;
+  margin-left: 1rem;
+  margin-right: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -364,7 +365,7 @@
   }
 
   .Interactions {
-    width: 100%;
+    width: 80%;
   }
 
   .Friend {

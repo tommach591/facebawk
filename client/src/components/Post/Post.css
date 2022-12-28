@@ -1,5 +1,5 @@
 .Post {
-  width: 42rem;
+  width: 100%;
 
   position: relative;
   display: flex;
@@ -88,9 +88,6 @@
   justify-content: center;
 
   margin-top: 1rem;
-
-  position: relative;
-  left: -15rem;
 }
 
 .PostLikes > img {
@@ -184,16 +181,13 @@
 }
 
 @media (max-width: 768px) {
-  .Post {
-    width: 80%;
-  }
-
   .PostContent {
     width: 92%;
   }
 
   .PostLikes {
-    left: -3.85rem;
+    bottom: 30%;
+    left: -20%;
   }
 
   .WriteAComment {

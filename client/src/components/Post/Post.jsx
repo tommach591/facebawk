@@ -79,18 +79,20 @@ function Post({ post }) {
           <h1 className="Date">{datePosted.toDateString()}</h1>
         </div>
       </div>
-      <h1 className="PostContent">{post.content}</h1>
-      {likes.length > 0 ? (
-        <div className="PostLikes">
-          <img
-            src="https://api.iconify.design/octicon:thumbsup-16.svg?color=%23646464"
-            alt=""
-          />
-          <h2>{nFormatter(likes.length, 2)}</h2>
-        </div>
-      ) : (
-        <div />
-      )}
+      <h1 className="PostContent">
+        {post.content}
+        {likes.length > 0 ? (
+          <div className="PostLikes">
+            <img
+              src="https://api.iconify.design/octicon:thumbsup-16.svg?color=%23646464"
+              alt=""
+            />
+            <h2>{nFormatter(likes.length, 2)}</h2>
+          </div>
+        ) : (
+          <div />
+        )}
+      </h1>
       <div className="Line" style={{ width: "95%" }} />
       <div className="PostInteractions">
         {likes.includes(user) ? (
