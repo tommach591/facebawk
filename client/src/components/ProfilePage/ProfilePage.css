@@ -274,12 +274,13 @@
   width: 100%;
   margin: 1rem;
   display: grid;
-  grid-template-columns: 7rem 7rem 7rem;
+  grid-template-columns: 35% 35% 35%;
+  justify-content: center;
 }
 
 .Friend {
   position: relative;
-  width: 7rem;
+  width: 100%;
 
   display: flex;
   justify-content: center;
@@ -366,13 +367,5 @@
 
   .Interactions {
     width: 80%;
-  }
-
-  .Friend {
-    width: 5.25rem;
-  }
-
-  .FriendGrid {
-    grid-template-columns: 5.25rem 5.25rem 5.25rem;
   }
 }
