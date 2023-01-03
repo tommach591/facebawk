@@ -113,7 +113,8 @@ function LoginPage() {
         </div>
         <div className="LoginPageBottom">
           <h1 className="Fineprint">
-            This is FaceBawk🐔 by ✨Tom Mach✨. Buk, buk, buk, ba-gawk.
+            There might be some lag when logging in due to the backend being on
+            sleep mode. Refresh the page if that happens and try again.
           </h1>
         </div>
         <SignUpForm modalOn={modalOn} setModalOn={setModalOn} />
