@@ -41,11 +41,6 @@ function LoginPage() {
     else alert("Cannot delete guest account.");
   };
 
-  const handleGuestAccount = () => {
-    setLoginLogin("facebawk");
-    setLoginPassword("password");
-  };
-
   const getWeb = () => {
     return (
       <div className="LoginPage">
@@ -83,7 +78,13 @@ function LoginPage() {
               <button
                 className="LoginScreenButton Guest"
                 onClick={() => {
-                  handleGuestAccount();
+                  loginAccount("facebawk").then((res) => {
+                    if (res && res.password === "password") {
+                      changeUser(res._id);
+                    } else {
+                      alert("Invalid login and password.");
+                    }
+                  });
                 }}
               >
                 Use Guest Account
