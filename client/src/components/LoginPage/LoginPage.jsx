@@ -114,8 +114,7 @@ function LoginPage() {
         </div>
         <div className="LoginPageBottom">
           <h1 className="Fineprint">
-            There might be some lag when logging in due to the backend being on
-            sleep mode. Refresh the page if that happens and try again.
+            Facebawk is a ✨ Chicken Themed ✨ Facebook clone made by Tom Mach.
           </h1>
         </div>
         <SignUpForm modalOn={modalOn} setModalOn={setModalOn} />
