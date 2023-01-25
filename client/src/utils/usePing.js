@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 function pingServer() {
-  const serverURL = "http://localhost:3001/";
+  const serverURL = "https://facebawk.herokuapp.com";
 
   return fetch(`${serverURL}`)
     .then((res) => {
