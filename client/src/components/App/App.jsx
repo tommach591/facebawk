@@ -7,12 +7,14 @@ import Header from "../Header";
 import SearchPage from "../SearchPage/";
 import FriendRequestPage from "../FriendRequestPage/";
 import { useUserData } from "../../utils/UserContext";
+import { usePing } from "../../utils/usePing";
 
 function App() {
   const userData = useUserData();
+  const ping = usePing();
   const [search, setSearch] = useState("");
 
-  return (
+  return ping ? (
     <div className="App">
       {Object.keys(userData).length !== 0 ? (
         <Header search={search} setSearch={setSearch} />
@@ -25,6 +27,10 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/requests" element={<FriendRequestPage />} />
       </Routes>
+    </div>
+  ) : (
+    <div className="Loading">
+      <h1>Pinging server...</h1>
     </div>
   );
 }
