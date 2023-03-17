@@ -1,3 +1,3 @@
 Facebawk is a Facebook clone.
 
-Live on https://facebawk.netlify.app/
+Demo: https://facebawk.netlify.app/
